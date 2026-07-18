@@ -60,6 +60,19 @@ const issueStats = [
 
 const feedbackEmail = ["gotlib58", "gmail.com"].join("@");
 
+const routecycleLinks = {
+  headerLogo:
+    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=header_logo",
+  headerCta:
+    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=header_cta",
+  heroCta:
+    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=hero_cta",
+  footerLogo:
+    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=footer_logo",
+  footerLink:
+    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=footer_link",
+};
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -277,7 +290,11 @@ export default function Home() {
       />
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Routecycle — наверх">
+        <a
+          className="brand"
+          href={routecycleLinks.headerLogo}
+          aria-label="Открыть Routecycle"
+        >
           <span className="brand-mark">
             <i />
             <i />
@@ -301,7 +318,7 @@ export default function Home() {
             <i aria-hidden="true">/</i>
             <span className={language === "en" ? "is-active" : ""}>EN</span>
           </button>
-          <a className="header-cta" href="#waitlist">
+          <a className="header-cta" href={routecycleLinks.headerCta}>
             <span className="header-cta-label">Мне интересно</span> <ArrowIcon />
           </a>
         </div>
@@ -322,7 +339,7 @@ export default function Home() {
             закрытые проезды, непроезжаемые тропы и неизвестное покрытие.
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#demo">
+            <a className="button button--primary" href={routecycleLinks.heroCta}>
               Протестировать маршрут <ArrowIcon />
             </a>
             <a className="text-link" href="#method">
@@ -618,11 +635,20 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand brand--footer" href="#top">
+        <a
+          className="brand brand--footer"
+          href={routecycleLinks.footerLogo}
+          aria-label="Открыть Routecycle"
+        >
           <span className="brand-mark"><i /><i /></span>
           ROUTECYCLE
         </a>
-        <p>Маршруты без неприятных сюрпризов.</p>
+        <p>
+          <a className="footer-site-link" href={routecycleLinks.footerLink}>
+            routecycle.com ↗
+          </a>
+          <span>Маршруты без неприятных сюрпризов.</span>
+        </p>
         <div>
           <span>PROTOTYPE 01</span>
           <span>DATA: OPENSTREETMAP</span>

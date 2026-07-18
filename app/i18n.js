@@ -4,6 +4,7 @@ export const englishByRussian = {
   "Routecycle проверяет данные OpenStreetMap и помогает строить веломаршруты с понятным покрытием, доступом и уровнем риска.":
     "Routecycle checks OpenStreetMap data and helps plan cycling routes with clear surface, access and risk information.",
   "Routecycle — наверх": "Routecycle — back to top",
+  "Открыть Routecycle": "Open Routecycle",
   "Основная навигация": "Main navigation",
   "Перейти к содержимому": "Skip to content",
   "Планировщик": "Planner",

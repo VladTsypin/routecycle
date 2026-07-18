@@ -19,6 +19,25 @@ export const metadata = {
   title: "Routecycle — cycling routes without unpleasant surprises",
   description:
     "Routecycle checks OpenStreetMap data and helps plan cycling routes with clear surface, access and risk information.",
+  keywords: [
+    "cycling route planner",
+    "bike route planner",
+    "gravel routes",
+    "OpenStreetMap cycling",
+    "Estonia cycling routes",
+    "surface and access checks",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "/routecycle/",
   },
@@ -38,10 +57,30 @@ export const metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Routecycle",
+  applicationCategory: "TravelApplication",
+  operatingSystem: "Web",
+  url: "https://routecycle.com/",
+  description:
+    "A cycling route planner that explains surface, access and route risks before a ride.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "EUR",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <body className={`${manrope.variable} ${plexMono.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
       </body>
     </html>

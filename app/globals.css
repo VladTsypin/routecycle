@@ -1355,6 +1355,26 @@ footer > p {
   font-size: 11px;
 }
 
+.footer-site-link,
+footer > p > span {
+  display: block;
+}
+
+.footer-site-link {
+  width: max-content;
+  min-height: 44px;
+  margin: 0 auto 5px;
+  display: inline-flex;
+  align-items: center;
+  color: white;
+  font-family: var(--mono);
+  letter-spacing: .04em;
+}
+
+.footer-site-link:hover {
+  color: var(--orange);
+}
+
 footer > div {
   display: flex;
   justify-content: flex-end;
@@ -1695,6 +1715,10 @@ footer > p {
 
   footer > p {
     text-align: left;
+  }
+
+  .footer-site-link {
+    margin-inline: 0;
   }
 
   footer > div {
