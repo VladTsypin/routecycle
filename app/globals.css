@@ -469,10 +469,8 @@ p {
 }
 
 .route-ticket {
-  position: absolute;
-  left: 9%;
-  right: 11%;
-  bottom: 52px;
+  position: relative;
+  margin: 18px 4.5% 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -1569,7 +1567,7 @@ footer > p {
 
   .hero-visual {
     min-height: 640px;
-    padding: 47px 20px 70px;
+    padding: 47px 20px;
     border-left: 0;
   }
 
@@ -1578,9 +1576,7 @@ footer > p {
   }
 
   .route-ticket {
-    left: 33px;
-    right: 48px;
-    bottom: 49px;
+    margin: 16px 10px 0;
   }
 
   .problem-section {
