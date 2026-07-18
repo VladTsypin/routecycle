@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <main className="not-found">
@@ -7,9 +9,9 @@ export default function NotFound() {
         <br />
         <em>Route not found.</em>
       </h1>
-      <a className="button button--primary" href="./">
+      <Link className="button button--primary" href="/">
         Вернуться к Routecycle
-      </a>
+      </Link>
     </main>
   );
 }
