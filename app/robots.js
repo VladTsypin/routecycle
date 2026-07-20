@@ -5,6 +5,7 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/routecycle/admin/",
     },
     sitemap: "https://vladtsypin.github.io/routecycle/sitemap.xml",
     host: "https://vladtsypin.github.io/routecycle/",

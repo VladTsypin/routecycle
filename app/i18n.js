@@ -11,6 +11,7 @@ export const englishByRussian = {
   "Как работает": "How it works",
   "Данные": "Data",
   "Блог": "Blog",
+  "Админка": "Admin",
   "Ранний доступ": "Early access",
   "Мне интересно": "I'm interested",
   "Маршруты, которым можно доверять": "Routes you can trust",

@@ -653,6 +653,7 @@ export default function Home() {
         </p>
         <div>
           <Link className="footer-blog-link" href="/blog/" prefetch={false}>Блог →</Link>
+          <Link className="footer-admin-link" href="/admin/" prefetch={false}>Админка</Link>
           <span>PROTOTYPE 01</span>
           <span>DATA: OPENSTREETMAP</span>
           <span>2026</span>
