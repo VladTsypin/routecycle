@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { applyInterfaceLanguage } from "./i18n";
 import Reveal from "./reveal";
@@ -305,6 +306,7 @@ export default function Home() {
           <a href="#demo">Планировщик</a>
           <a href="#method">Как работает</a>
           <a href="#data">Данные</a>
+          <Link href="/blog/" prefetch={false}>Блог</Link>
         </nav>
         <div className="header-actions">
           <button
@@ -650,6 +652,7 @@ export default function Home() {
           <span>Маршруты без неприятных сюрпризов.</span>
         </p>
         <div>
+          <Link className="footer-blog-link" href="/blog/" prefetch={false}>Блог →</Link>
           <span>PROTOTYPE 01</span>
           <span>DATA: OPENSTREETMAP</span>
           <span>2026</span>

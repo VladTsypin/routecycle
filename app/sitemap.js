@@ -8,5 +8,17 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: "https://vladtsypin.github.io/routecycle/blog/",
+      lastModified: new Date("2026-07-20"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: "https://vladtsypin.github.io/routecycle/blog/why-a-line-is-not-a-route/",
+      lastModified: new Date("2026-07-20"),
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
   ];
 }

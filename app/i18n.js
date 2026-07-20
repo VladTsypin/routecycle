@@ -10,6 +10,7 @@ export const englishByRussian = {
   "Планировщик": "Planner",
   "Как работает": "How it works",
   "Данные": "Data",
+  "Блог": "Blog",
   "Ранний доступ": "Early access",
   "Мне интересно": "I'm interested",
   "Маршруты, которым можно доверять": "Routes you can trust",
