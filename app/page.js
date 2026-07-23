@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { motion, useScroll } from "motion/react";
 import { applyInterfaceLanguage } from "./i18n";
 import Reveal from "./reveal";
 
@@ -97,13 +98,6 @@ function RouteMap({ route, showAlternative }) {
         aria-label={`Схема маршрута: ${route.label}`}
       >
         <defs>
-          <filter id="routeGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
           <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" strokeWidth=".7" />
           </pattern>
@@ -139,7 +133,6 @@ function RouteMap({ route, showAlternative }) {
           d={route.path}
           className="route-line"
           pathLength="1"
-          filter="url(#routeGlow)"
         />
 
         <g className="route-points">
@@ -184,24 +177,14 @@ export default function Home() {
   const [surfaceCheck, setSurfaceCheck] = useState(true);
   const [accessCheck, setAccessCheck] = useState(true);
   const [submitted, setSubmitted] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [language, setLanguage] = useState("ru");
+  const { scrollYProgress } = useScroll();
 
   const route = routes[routeKey];
   const confidence = useMemo(() => {
     const adjustment = (surfaceCheck ? 0 : -11) + (accessCheck ? 0 : -7);
     return Math.max(60, route.confidence + adjustment);
   }, [accessCheck, route.confidence, surfaceCheck]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const height = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(height > 0 ? window.scrollY / height : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("routecycle-language");
@@ -217,8 +200,8 @@ export default function Home() {
     window.localStorage.setItem("routecycle-language", language);
     const syncMetadata = () => {
       const nextTitle = language === "en"
-        ? "Routecycle — cycling routes without unpleasant surprises"
-        : "Routecycle — маршруты без неприятных сюрпризов";
+        ? "Routecycle: cycling routes without unpleasant surprises"
+        : "Routecycle: маршруты без неприятных сюрпризов";
       if (document.title !== nextTitle) {
         document.title = nextTitle;
       }
@@ -262,10 +245,11 @@ export default function Home() {
     const email = data.get("email");
     const city = data.get("city");
     const bike = data.get("bike");
-    const feedback = data.get("feedback") || "—";
+    const feedback = data.get("feedback")
+      || (language === "en" ? "Not specified" : "Не указано");
     const subject = language === "en"
-      ? "Routecycle — rider interest"
-      : "Routecycle — интерес велосипедиста";
+      ? "Routecycle: rider interest"
+      : "Routecycle: интерес велосипедиста";
     const body = language === "en"
       ? `I'm interested in testing Routecycle.\n\nEmail: ${email}\nCity: ${city}\nBike: ${bike}\nWhat I want Routecycle to check: ${feedback}`
       : `Мне интересно протестировать Routecycle.\n\nПочта: ${email}\nГород: ${city}\nВелосипед: ${bike}\nЧто должен проверять Routecycle: ${feedback}`;
@@ -284,9 +268,9 @@ export default function Home() {
         Перейти к содержимому
       </a>
       <main id="main-content">
-      <div
+      <motion.div
         className="scroll-progress"
-        style={{ transform: `scaleX(${scrollProgress})` }}
+        style={{ scaleX: scrollYProgress }}
         aria-hidden="true"
       />
 
@@ -321,7 +305,9 @@ export default function Home() {
             <span className={language === "en" ? "is-active" : ""}>EN</span>
           </button>
           <a className="header-cta" href={routecycleLinks.headerCta}>
-            <span className="header-cta-label">Мне интересно</span> <ArrowIcon />
+            <span className="header-cta-label">Мне интересно</span>
+            <span className="header-cta-short-label">Тест</span>
+            <ArrowIcon />
           </a>
         </div>
       </header>
@@ -329,7 +315,7 @@ export default function Home() {
       <section className="hero" id="top">
         <Reveal className="hero-copy">
           <p className="eyebrow">
-            <span>01</span> Маршруты, которым можно доверять
+            Маршруты, которым можно доверять
           </p>
           <h1>
             Приключение
@@ -345,14 +331,8 @@ export default function Home() {
               Протестировать маршрут <ArrowIcon />
             </a>
             <a className="text-link" href="#method">
-              Посмотреть метод <span>↓</span>
+              Посмотреть метод
             </a>
-          </div>
-          <div className="hero-proof">
-            <div className="avatars" aria-hidden="true">
-              <span>MT</span><span>AK</span><span>+8</span>
-            </div>
-            <p><strong>Проверено на полевых данных</strong><br />OpenStreetMap · Estonia</p>
           </div>
         </Reveal>
 
@@ -364,7 +344,7 @@ export default function Home() {
           <RouteMap route={routes.balanced} showAlternative />
           <div className="route-ticket">
             <div>
-              <span>Маршрут 01</span>
+              <span>Маршрут</span>
               <strong>Tartu → Elva</strong>
             </div>
             <div className="ticket-score">
@@ -372,26 +352,24 @@ export default function Home() {
               <strong>92</strong><small>/100</small>
             </div>
           </div>
-          <p className="vertical-note">LESS GUESSING — MORE RIDING</p>
         </Reveal>
       </section>
 
+      <aside className="source-proof" aria-label="Данные прототипа">
+        <strong>Данные прототипа</strong>
+        <span>OpenStreetMap · Estonia</span>
+      </aside>
+
       <section className="ticker" aria-label="Преимущества">
         <div>
-          <span>проверка покрытия</span><i>✦</i>
-          <span>контроль доступа</span><i>✦</i>
-          <span>оценка проезжаемости</span><i>✦</i>
-          <span>данные openstreetmap</span><i>✦</i>
-          <span>проверка покрытия</span><i>✦</i>
-          <span>контроль доступа</span><i>✦</i>
+          <span>проверка покрытия</span>
+          <span>контроль доступа</span>
+          <span>оценка проезжаемости</span>
+          <span>данные openstreetmap</span>
         </div>
       </section>
 
       <section className="problem-section" id="data">
-        <div className="section-index">
-          <span>02</span>
-          <p>Проблема<br />под поверхностью</p>
-        </div>
         <div className="problem-copy">
           <h2>
             Карта показывает линию.
@@ -399,7 +377,7 @@ export default function Home() {
             Мы показываем, <em>что вас ждёт.</em>
           </h2>
           <p>
-            Участок может выглядеть идеально на экране — и закончиться песком,
+            Участок может выглядеть идеально на экране, но закончиться песком,
             закрытым шлагбаумом или тропой, по которой велосипед придётся нести.
             Routecycle собирает сигналы качества в одну понятную оценку.
           </p>
@@ -418,7 +396,7 @@ export default function Home() {
       <section className="planner-section" id="demo">
         <div className="planner-heading">
           <div>
-            <p className="eyebrow eyebrow--light"><span>03</span> Живой прототип</p>
+            <p className="eyebrow eyebrow--light">Живой прототип</p>
             <h2>Выберите, как хотите ехать.</h2>
           </div>
           <p>
@@ -491,7 +469,9 @@ export default function Home() {
               <div className="confidence-value">
                 <strong>{confidence}</strong><small>/100</small>
               </div>
-              <div className="meter"><i style={{ width: `${confidence}%` }} /></div>
+              <div className="meter">
+                <i style={{ transform: `scaleX(${confidence / 100})` }} />
+              </div>
               <p>
                 {confidence >= 95
                   ? "Все ключевые участки подтверждены."
@@ -518,7 +498,6 @@ export default function Home() {
 
       <section className="waitlist-section" id="waitlist">
         <div className="waitlist-copy">
-          <p className="eyebrow"><span>04</span> Подтвердить интерес</p>
           <h2>Хотите проверить<br />свой маршрут?</h2>
           <p>
             Оставьте короткий отклик. Мы подготовим письмо с вашим городом,
@@ -587,12 +566,10 @@ export default function Home() {
 
       <section className="method-section" id="method">
         <div className="method-title">
-          <p className="eyebrow"><span>05</span> Под капотом</p>
           <h2>От линии на карте<br />до уверенного старта.</h2>
         </div>
         <div className="method-steps">
           <article>
-            <span className="step-number">01</span>
             <div className="step-visual step-visual--scan" aria-hidden="true">
               <i /><i /><i /><i />
             </div>
@@ -601,7 +578,6 @@ export default function Home() {
             <code>way → tags → geometry</code>
           </article>
           <article>
-            <span className="step-number">02</span>
             <div className="step-visual step-visual--signals" aria-hidden="true">
               <b>surface</b><b>access</b><b>mtb:scale</b><b>smoothness</b>
             </div>
@@ -610,7 +586,6 @@ export default function Home() {
             <code>7 signal families</code>
           </article>
           <article>
-            <span className="step-number">03</span>
             <div className="step-visual step-visual--route" aria-hidden="true">
               <svg viewBox="0 0 240 100"><path d="M9 79 C53 22 82 82 121 47 S186 24 229 11" /></svg>
             </div>
@@ -622,7 +597,6 @@ export default function Home() {
       </section>
 
       <section className="manifesto">
-        <div className="manifesto-grid" aria-hidden="true" />
         <p>Не делаем маршрут короче любой ценой.</p>
         <h2>
           Делаем так, чтобы вы знали,

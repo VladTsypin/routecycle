@@ -1,9 +1,9 @@
 export const englishByRussian = {
-  "Routecycle — маршруты без неприятных сюрпризов":
-    "Routecycle — cycling routes without unpleasant surprises",
+  "Routecycle: маршруты без неприятных сюрпризов":
+    "Routecycle: cycling routes without unpleasant surprises",
   "Routecycle проверяет данные OpenStreetMap и помогает строить веломаршруты с понятным покрытием, доступом и уровнем риска.":
     "Routecycle checks OpenStreetMap data and helps plan cycling routes with clear surface, access and risk information.",
-  "Routecycle — наверх": "Routecycle — back to top",
+  "Routecycle: наверх": "Routecycle: back to top",
   "Открыть Routecycle": "Open Routecycle",
   "Основная навигация": "Main navigation",
   "Перейти к содержимому": "Skip to content",
@@ -14,6 +14,7 @@ export const englishByRussian = {
   "Админка": "Admin",
   "Ранний доступ": "Early access",
   "Мне интересно": "I'm interested",
+  "Тест": "Test",
   "Маршруты, которым можно доверять": "Routes you can trust",
   "Приключение": "Adventure",
   "без": "without",
@@ -23,14 +24,14 @@ export const englishByRussian = {
   "Построить маршрут": "Plan a route",
   "Протестировать маршрут": "Test the planner",
   "Посмотреть метод": "See how it works",
-  "Проверено на полевых данных": "Validated with field data",
+  "Данные прототипа": "Prototype data",
   "Схема маршрута: Сбалансированный": "Route diagram: Balanced",
   "Схема маршрута: Красивый": "Route diagram: Scenic",
   "Схема маршрута: Надёжный": "Route diagram: Reliable",
   "Проверено": "Verified",
   "Нужна проверка": "Needs review",
   "Сложный участок": "Difficult section",
-  "Маршрут 01": "Route 01",
+  "Маршрут": "Route",
   "Доверие": "Confidence",
   "Преимущества": "Benefits",
   "проверка покрытия": "surface checks",
@@ -42,7 +43,7 @@ export const englishByRussian = {
   "Карта показывает линию.": "A map shows a line.",
   "Мы показываем,": "We show",
   "что вас ждёт.": "what lies ahead.",
-  "Участок может выглядеть идеально на экране — и закончиться песком, закрытым шлагбаумом или тропой, по которой велосипед придётся нести. Routecycle собирает сигналы качества в одну понятную оценку.":
+  "Участок может выглядеть идеально на экране, но закончиться песком, закрытым шлагбаумом или тропой, по которой велосипед придётся нести. Routecycle собирает сигналы качества в одну понятную оценку.":
     "A section can look perfect on screen and end in sand, a locked gate or a trail where you have to carry the bike. Routecycle turns quality signals into one clear score.",
   "подозрительных участков": "suspicious sections",
   "в исследовательском наборе по Эстонии": "in the Estonia research dataset",
@@ -116,8 +117,8 @@ export const englishByRussian = {
   "Нажимая кнопку, вы тестируете только интерфейс. Отправки данных пока нет.":
     "This prototype only demonstrates the interface. No data is submitted yet.",
   "Вы в списке.": "You are on the list.",
-  "В прототипе данные никуда не отправляются — это демонстрация сценария.":
-    "The prototype does not submit data yet — this is a demonstration of the flow.",
+  "В прототипе данные никуда не отправляются. Это демонстрация сценария.":
+    "The prototype does not submit data yet. This is a demonstration of the flow.",
   "Заполнить ещё раз": "Fill in again",
   "Маршруты без неприятных сюрпризов.": "Routes without unpleasant surprises.",
   "Покрытие не указано": "Surface not specified",
