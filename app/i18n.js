@@ -12,6 +12,8 @@ export const englishByRussian = {
   "Данные": "Data",
   "Блог": "Blog",
   "Админка": "Admin",
+  "ТЕСТОВЫЙ ФРОНТ": "TEST FRONT",
+  "Открыть тестовый фронт": "Open test frontend",
   "Ранний доступ": "Early access",
   "Мне интересно": "I'm interested",
   "Тест": "Test",

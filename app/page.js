@@ -291,6 +291,7 @@ export default function Home() {
           <a href="#method">Как работает</a>
           <a href="#data">Данные</a>
           <Link href="/blog/" prefetch={false}>Блог</Link>
+          <Link href="/test-frontend/" prefetch={false}>ТЕСТОВЫЙ ФРОНТ</Link>
         </nav>
         <div className="header-actions">
           <button
@@ -330,6 +331,14 @@ export default function Home() {
             <a className="button button--primary" href={routecycleLinks.heroCta}>
               Протестировать маршрут <ArrowIcon />
             </a>
+            <Link
+              className="button button--test-front"
+              href="/test-frontend/"
+              prefetch={false}
+              aria-label="Открыть тестовый фронт"
+            >
+              ТЕСТОВЫЙ ФРОНТ <ArrowIcon />
+            </Link>
             <a className="text-link" href="#method">
               Посмотреть метод
             </a>
@@ -620,6 +629,14 @@ export default function Home() {
           ROUTECYCLE
         </a>
         <p>
+          <Link
+            className="footer-test-front-cta"
+            href="/test-frontend/"
+            prefetch={false}
+            aria-label="Открыть тестовый фронт"
+          >
+            ТЕСТОВЫЙ ФРОНТ <ArrowIcon />
+          </Link>
           <a className="footer-site-link" href={routecycleLinks.footerLink}>
             routecycle.com ↗
           </a>
