@@ -363,22 +363,6 @@ p {
   transform: translateY(1px);
 }
 
-.button--test-front {
-  border: 1px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.button--test-front:hover {
-  background: var(--orange);
-  color: white;
-}
-
-.button--test-front:active {
-  transform: translateY(1px);
-}
-
 .text-link {
   font-size: 12px;
   font-weight: 600;
@@ -616,6 +600,7 @@ p {
 
 .source-proof span {
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .ticker {
@@ -896,9 +881,15 @@ p {
 
 .confidence-card p {
   margin: 13px 0 0;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.55;
   color: rgba(255,255,255,.46);
+}
+
+.confidence-card .confidence-note {
+  padding-top: 11px;
+  border-top: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.62);
 }
 
 .planner-map {
@@ -1239,7 +1230,8 @@ p {
   line-height: 1.5;
 }
 
-.form-success button {
+.form-success button,
+.form-success a {
   margin-top: 28px;
   border: 0;
   border-bottom: 1px solid currentColor;
@@ -1248,6 +1240,12 @@ p {
   cursor: pointer;
   font: 10px var(--mono);
   text-transform: uppercase;
+}
+
+.form-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
 }
 
 footer {
@@ -1269,37 +1267,6 @@ footer > p {
   text-align: center;
   color: rgba(255,255,255,.55);
   font-size: 11px;
-}
-
-.footer-test-front-cta {
-  min-height: 52px;
-  margin: 0 auto 14px;
-  padding: 0 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  border: 1px solid var(--orange);
-  color: white;
-  font: 11px var(--mono);
-  letter-spacing: .05em;
-  transition: background 180ms ease, color 180ms ease;
-}
-
-.footer-test-front-cta svg {
-  width: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  transition: transform 180ms ease;
-}
-
-.footer-test-front-cta:hover {
-  background: var(--orange);
-}
-
-.footer-test-front-cta:hover svg {
-  transform: translateX(4px);
 }
 
 .footer-site-link,
@@ -1431,6 +1398,15 @@ footer > p {
 .waitlist-form textarea:focus {
   border-bottom-color: var(--orange);
   box-shadow: 0 2px 0 var(--orange);
+}
+
+.waitlist-form .prepared-draft {
+  min-height: 150px;
+  margin-top: 22px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: rgba(18,20,19,.035);
+  font: 12px/1.55 var(--mono);
 }
 
 .waitlist-form :is(input, select, textarea):user-invalid {
@@ -2349,6 +2325,13 @@ footer > p {
     height: auto;
   }
 
+  .source-proof {
+    min-height: 0;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 5px 14px;
+  }
+
   .ticker > div {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2423,6 +2406,10 @@ footer > p {
     margin-top: 25px;
   }
 
+  .confidence-card p {
+    font-size: 12px;
+  }
+
   .planner-map .map-stage {
     min-height: 460px;
   }
@@ -2450,14 +2437,14 @@ footer > p {
 
   .method-steps article {
     min-height: 0;
-    padding: 32px 20px 72px;
+    padding: 28px 20px 48px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
 
   .step-visual {
-    height: 150px;
-    margin: 24px 0 30px;
+    height: 120px;
+    margin: 18px 0 26px;
   }
 
   .method-steps article:last-child {
@@ -2500,12 +2487,6 @@ footer > p {
   footer > p {
     width: 100%;
     text-align: left;
-  }
-
-  .footer-test-front-cta {
-    width: 100%;
-    margin-inline: 0;
-    justify-content: space-between;
   }
 
   .footer-site-link {

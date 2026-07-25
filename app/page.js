@@ -61,12 +61,16 @@ const issueStats = [
 ];
 
 const feedbackEmail = ["gotlib58", "gmail.com"].join("@");
+const emptyInterestDraft = {
+  email: "",
+  city: "",
+  bike: "gravel",
+  feedback: "",
+};
 
 const routecycleLinks = {
   headerLogo:
     "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=header_logo",
-  headerCta:
-    "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=header_cta",
   heroCta:
     "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=hero_cta",
   footerLogo:
@@ -177,6 +181,10 @@ export default function Home() {
   const [surfaceCheck, setSurfaceCheck] = useState(true);
   const [accessCheck, setAccessCheck] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [interestDraft, setInterestDraft] = useState(emptyInterestDraft);
+  const [preparedDraft, setPreparedDraft] = useState("");
+  const [clipboardCopied, setClipboardCopied] = useState(false);
+  const [clipboardError, setClipboardError] = useState(false);
   const [language, setLanguage] = useState("ru");
   const { scrollYProgress } = useScroll();
 
@@ -193,6 +201,26 @@ export default function Home() {
       return;
     }
     setLanguage(navigator.language.toLowerCase().startsWith("ru") ? "ru" : "en");
+  }, []);
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(
+        window.sessionStorage.getItem("routecycle-interest-draft") || "null",
+      );
+      if (saved && typeof saved === "object") {
+        setInterestDraft({
+          email: typeof saved.email === "string" ? saved.email : "",
+          city: typeof saved.city === "string" ? saved.city : "",
+          bike: ["gravel", "touring", "mtb", "road"].includes(saved.bike)
+            ? saved.bike
+            : "gravel",
+          feedback: typeof saved.feedback === "string" ? saved.feedback : "",
+        });
+      }
+    } catch {
+      window.sessionStorage.removeItem("routecycle-interest-draft");
+    }
   }, []);
 
   useEffect(() => {
@@ -231,6 +259,8 @@ export default function Home() {
     };
   }, [
     accessCheck,
+    clipboardCopied,
+    clipboardError,
     confidence,
     language,
     routeKey,
@@ -239,13 +269,38 @@ export default function Home() {
     surfaceCheck,
   ]);
 
-  const submitInterest = (event) => {
+  const updateInterestDraft = (field, value) => {
+    setInterestDraft((current) => {
+      const next = { ...current, [field]: value };
+      window.sessionStorage.setItem(
+        "routecycle-interest-draft",
+        JSON.stringify(next),
+      );
+      return next;
+    });
+  };
+
+  const copyPreparedDraft = async () => {
+    if (!navigator.clipboard || !preparedDraft) {
+      setClipboardCopied(false);
+      setClipboardError(true);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(preparedDraft);
+      setClipboardCopied(true);
+      setClipboardError(false);
+    } catch {
+      setClipboardCopied(false);
+      setClipboardError(true);
+    }
+  };
+
+  const submitInterest = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const city = data.get("city");
-    const bike = data.get("bike");
-    const feedback = data.get("feedback")
+    const { email, city, bike } = interestDraft;
+    const feedback = interestDraft.feedback
       || (language === "en" ? "Not specified" : "Не указано");
     const subject = language === "en"
       ? "Routecycle: rider interest"
@@ -255,11 +310,23 @@ export default function Home() {
       : `Мне интересно протестировать Routecycle.\n\nПочта: ${email}\nГород: ${city}\nВелосипед: ${bike}\nЧто должен проверять Routecycle: ${feedback}`;
     const draft = `${subject}\n\n${body}`;
 
-    navigator.clipboard?.writeText(draft).catch(() => {});
+    setPreparedDraft(draft);
+    setClipboardCopied(false);
+    setClipboardError(false);
     setSubmitted(true);
-    window.setTimeout(() => {
-      window.location.href = `mailto:${feedbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }, 80);
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(draft);
+        setClipboardCopied(true);
+        setClipboardError(false);
+      } catch {
+        setClipboardCopied(false);
+        setClipboardError(true);
+      }
+    } else {
+      setClipboardError(true);
+    }
+    window.location.href = `mailto:${feedbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -291,7 +358,7 @@ export default function Home() {
           <a href="#method">Как работает</a>
           <a href="#data">Данные</a>
           <Link href="/blog/" prefetch={false}>Блог</Link>
-          <Link href="/test-frontend/" prefetch={false}>ТЕСТОВЫЙ ФРОНТ</Link>
+          <Link href="/test-frontend/" prefetch={false}>Демо</Link>
         </nav>
         <div className="header-actions">
           <button
@@ -305,9 +372,9 @@ export default function Home() {
             <i aria-hidden="true">/</i>
             <span className={language === "en" ? "is-active" : ""}>EN</span>
           </button>
-          <a className="header-cta" href={routecycleLinks.headerCta}>
-            <span className="header-cta-label">Мне интересно</span>
-            <span className="header-cta-short-label">Тест</span>
+          <a className="header-cta" href="#waitlist">
+            <span className="header-cta-label">Оставить отклик</span>
+            <span className="header-cta-short-label">Отклик</span>
             <ArrowIcon />
           </a>
         </div>
@@ -316,7 +383,7 @@ export default function Home() {
       <section className="hero" id="top">
         <Reveal className="hero-copy">
           <p className="eyebrow">
-            Маршруты, которым можно доверять
+            Маршрут с объяснением рисков
           </p>
           <h1>
             Приключение
@@ -332,16 +399,12 @@ export default function Home() {
               Протестировать маршрут <ArrowIcon />
             </a>
             <Link
-              className="button button--test-front"
+              className="text-link"
               href="/test-frontend/"
               prefetch={false}
-              aria-label="Открыть тестовый фронт"
             >
-              ТЕСТОВЫЙ ФРОНТ <ArrowIcon />
+              Открыть демо
             </Link>
-            <a className="text-link" href="#method">
-              Посмотреть метод
-            </a>
           </div>
         </Reveal>
 
@@ -357,16 +420,16 @@ export default function Home() {
               <strong>Tartu → Elva</strong>
             </div>
             <div className="ticket-score">
-              <span>Доверие</span>
+              <span>Полнота</span>
               <strong>92</strong><small>/100</small>
             </div>
           </div>
         </Reveal>
       </section>
 
-      <aside className="source-proof" aria-label="Данные прототипа">
-        <strong>Данные прототипа</strong>
-        <span>OpenStreetMap · Estonia</span>
+      <aside className="source-proof" aria-label="Основа оценки">
+        <strong>Основа оценки</strong>
+        <span>OpenStreetMap · Estonia · данные могут быть неполными</span>
       </aside>
 
       <section className="ticker" aria-label="Преимущества">
@@ -474,7 +537,7 @@ export default function Home() {
             </div>
 
             <div className="confidence-card">
-              <span>Уверенность маршрута</span>
+              <span>Полнота проверки</span>
               <div className="confidence-value">
                 <strong>{confidence}</strong><small>/100</small>
               </div>
@@ -483,10 +546,13 @@ export default function Home() {
               </div>
               <p>
                 {confidence >= 95
-                  ? "Все ключевые участки подтверждены."
+                  ? "Учтено большинство доступных сигналов."
                   : confidence >= 85
-                    ? "Есть участки для быстрой проверки."
-                    : "Включите больше проверок перед поездкой."}
+                    ? "Часть участков требует проверки на месте."
+                    : "Данных недостаточно: проверьте маршрут вручную."}
+              </p>
+              <p className="confidence-note">
+                Не гарантия безопасности, законности или текущего состояния.
               </p>
             </div>
           </aside>
@@ -498,79 +564,11 @@ export default function Home() {
               <div><span>Гравий</span><strong>{route.gravel}</strong></div>
               <div><span>В пути</span><strong>{route.time}</strong></div>
               <button type="button" onClick={() => document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" })}>
-                Я бы поехал <ArrowIcon />
+                Оставить отклик <ArrowIcon />
               </button>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="waitlist-section" id="waitlist">
-        <div className="waitlist-copy">
-          <h2>Хотите проверить<br />свой маршрут?</h2>
-          <p>
-            Оставьте короткий отклик. Мы подготовим письмо с вашим городом,
-            типом велосипеда и пожеланием к проверке маршрута.
-          </p>
-        </div>
-        <form className="waitlist-form" onSubmit={submitInterest}>
-          {submitted ? (
-            <div className="form-success" role="status">
-              <span>✓</span>
-              <h3>Черновик готов.</h3>
-              <p>
-                Мы открыли почтовое приложение и скопировали сообщение.
-                Ничего не отправится, пока вы не нажмёте «Отправить».
-              </p>
-              <button type="button" onClick={() => setSubmitted(false)}>
-                Заполнить ещё раз
-              </button>
-            </div>
-          ) : (
-            <>
-              <label>
-                <span>Почта</span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="rider@example.com"
-                  required
-                />
-              </label>
-              <label>
-                <span>Ваш город</span>
-                <input
-                  name="city"
-                  type="text"
-                  placeholder="Tartu, Tallinn, Riga…"
-                  required
-                />
-              </label>
-              <label>
-                <span>На чём вы ездите?</span>
-                <select name="bike" defaultValue="gravel">
-                  <option value="gravel">Gravel</option>
-                  <option value="touring">Touring</option>
-                  <option value="mtb">MTB</option>
-                  <option value="road">Road</option>
-                </select>
-              </label>
-              <label>
-                <span>Что важно проверить?</span>
-                <textarea
-                  name="feedback"
-                  placeholder="Покрытие, закрытые проезды, сложность тропы…"
-                />
-              </label>
-              <button className="button button--primary wide-field" type="submit">
-                Подтвердить интерес <ArrowIcon />
-              </button>
-              <small className="wide-field feedback-privacy">
-                Откроется ваше почтовое приложение. Сообщение не отправляется автоматически.
-              </small>
-            </>
-          )}
-        </form>
       </section>
 
       <section className="method-section" id="method">
@@ -605,6 +603,104 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="waitlist-section" id="waitlist">
+        <div className="waitlist-copy">
+          <h2>Хотите проверить<br />свой маршрут?</h2>
+          <p>
+            Оставьте короткий отклик. Мы подготовим письмо с вашим городом,
+            типом велосипеда и пожеланием к проверке маршрута.
+          </p>
+        </div>
+        <form className="waitlist-form" onSubmit={submitInterest}>
+          {submitted ? (
+            <div className="form-success" role="status">
+              <span>✓</span>
+              <h3>Черновик подготовлен.</h3>
+              <p>
+                {clipboardCopied
+                  ? "Текст письма скопирован. Если почтовое приложение не открылось, вставьте его вручную."
+                  : clipboardError
+                    ? "Автокопирование недоступно. Выделите текст в поле ниже и скопируйте его вручную."
+                    : "Если почтовое приложение не открылось, скопируйте текст письма и отправьте его вручную."}
+              </p>
+              <textarea
+                className="prepared-draft"
+                value={preparedDraft}
+                readOnly
+                aria-label="Текст письма"
+              />
+              <div className="form-success-actions">
+                <button type="button" onClick={copyPreparedDraft}>
+                  Скопировать текст
+                </button>
+                <a href={`mailto:${feedbackEmail}`}>Написать вручную</a>
+                <button type="button" onClick={() => setSubmitted(false)}>
+                  Изменить данные
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <label>
+                <span>Почта</span>
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="rider@example.com"
+                  autoComplete="email"
+                  maxLength={254}
+                  value={interestDraft.email}
+                  onChange={(event) => updateInterestDraft("email", event.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                <span>Ваш город</span>
+                <input
+                  name="city"
+                  type="text"
+                  placeholder="Tartu, Tallinn, Riga…"
+                  autoComplete="address-level2"
+                  maxLength={80}
+                  value={interestDraft.city}
+                  onChange={(event) => updateInterestDraft("city", event.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                <span>На чём вы ездите?</span>
+                <select
+                  name="bike"
+                  value={interestDraft.bike}
+                  onChange={(event) => updateInterestDraft("bike", event.target.value)}
+                >
+                  <option value="gravel">Gravel</option>
+                  <option value="touring">Touring</option>
+                  <option value="mtb">MTB</option>
+                  <option value="road">Road</option>
+                </select>
+              </label>
+              <label>
+                <span>Что важно проверить? (необязательно)</span>
+                <textarea
+                  name="feedback"
+                  placeholder="Покрытие, закрытые проезды, сложность тропы…"
+                  maxLength={600}
+                  value={interestDraft.feedback}
+                  onChange={(event) => updateInterestDraft("feedback", event.target.value)}
+                />
+              </label>
+              <button className="button button--primary wide-field" type="submit">
+                Подготовить письмо <ArrowIcon />
+              </button>
+              <small className="wide-field feedback-privacy">
+                Откроется ваше почтовое приложение. Сообщение не отправляется автоматически.
+              </small>
+            </>
+          )}
+        </form>
+      </section>
+
       <section className="manifesto">
         <p>Не делаем маршрут короче любой ценой.</p>
         <h2>
@@ -629,14 +725,6 @@ export default function Home() {
           ROUTECYCLE
         </a>
         <p>
-          <Link
-            className="footer-test-front-cta"
-            href="/test-frontend/"
-            prefetch={false}
-            aria-label="Открыть тестовый фронт"
-          >
-            ТЕСТОВЫЙ ФРОНТ <ArrowIcon />
-          </Link>
           <a className="footer-site-link" href={routecycleLinks.footerLink}>
             routecycle.com ↗
           </a>

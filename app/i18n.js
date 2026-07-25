@@ -12,12 +12,12 @@ export const englishByRussian = {
   "Данные": "Data",
   "Блог": "Blog",
   "Админка": "Admin",
-  "ТЕСТОВЫЙ ФРОНТ": "TEST FRONT",
-  "Открыть тестовый фронт": "Open test frontend",
+  "Демо": "Demo",
+  "Открыть демо": "Open demo",
   "Ранний доступ": "Early access",
-  "Мне интересно": "I'm interested",
-  "Тест": "Test",
-  "Маршруты, которым можно доверять": "Routes you can trust",
+  "Оставить отклик": "Leave feedback",
+  "Отклик": "Feedback",
+  "Маршрут с объяснением рисков": "A route with explained risks",
   "Приключение": "Adventure",
   "без": "without",
   "сюрпризов.": "surprises.",
@@ -25,8 +25,9 @@ export const englishByRussian = {
     "Routecycle catches what ordinary planners miss: closed roads, unrideable trails and unknown surfaces.",
   "Построить маршрут": "Plan a route",
   "Протестировать маршрут": "Test the planner",
-  "Посмотреть метод": "See how it works",
-  "Данные прототипа": "Prototype data",
+  "Основа оценки": "Evidence base",
+  "OpenStreetMap · Estonia · данные могут быть неполными":
+    "OpenStreetMap · Estonia · data may be incomplete",
   "Схема маршрута: Сбалансированный": "Route diagram: Balanced",
   "Схема маршрута: Красивый": "Route diagram: Scenic",
   "Схема маршрута: Надёжный": "Route diagram: Reliable",
@@ -34,7 +35,7 @@ export const englishByRussian = {
   "Нужна проверка": "Needs review",
   "Сложный участок": "Difficult section",
   "Маршрут": "Route",
-  "Доверие": "Confidence",
+  "Полнота": "Coverage",
   "Преимущества": "Benefits",
   "проверка покрытия": "surface checks",
   "контроль доступа": "access checks",
@@ -70,15 +71,19 @@ export const englishByRussian = {
   "Доступ": "Access",
   "Альтернатива": "Alternative",
   "показать запасной путь": "show a backup route",
-  "Уверенность маршрута": "Route confidence",
-  "Все ключевые участки подтверждены.": "All key sections are verified.",
-  "Есть участки для быстрой проверки.": "A few sections need a quick review.",
-  "Включите больше проверок перед поездкой.": "Enable more checks before the ride.",
+  "Полнота проверки": "Check coverage",
+  "Учтено большинство доступных сигналов.":
+    "Most available signals are included.",
+  "Часть участков требует проверки на месте.":
+    "Some sections still need an on-site check.",
+  "Данных недостаточно: проверьте маршрут вручную.":
+    "Not enough data: review the route manually.",
+  "Не гарантия безопасности, законности или текущего состояния.":
+    "Not a guarantee of safety, legality or current conditions.",
   "Дистанция": "Distance",
   "Гравий": "Gravel",
   "В пути": "Ride time",
   "Сохранить маршрут": "Save route",
-  "Я бы поехал": "I'd ride this",
   "Под капотом": "Under the hood",
   "От линии на карте": "From a line on the map",
   "до уверенного старта.": "to a confident start.",
@@ -95,7 +100,7 @@ export const englishByRussian = {
   "Делаем так, чтобы вы знали,": "We make sure you know",
   "куда сворачиваете.": "where you are turning.",
   "Следующий поворот": "The next turn",
-  "Подтвердить интерес": "Confirm interest",
+  "Подготовить письмо": "Prepare email",
   "Хотите проверить": "Want to test",
   "свой маршрут?": "your own route?",
   "Оставьте короткий отклик. Мы подготовим письмо с вашим городом, типом велосипеда и пожеланием к проверке маршрута.":
@@ -108,20 +113,28 @@ export const englishByRussian = {
   "Ваш город": "Your city",
   "На чём вы ездите?": "What do you ride?",
   "Запросить ранний доступ": "Request early access",
-  "Что важно проверить?": "What should Routecycle check?",
+  "Что важно проверить? (необязательно)":
+    "What should Routecycle check? (optional)",
   "Покрытие, закрытые проезды, сложность тропы…":
     "Surface, closed roads, trail difficulty…",
   "Откроется ваше почтовое приложение. Сообщение не отправляется автоматически.":
     "Your email app will open. Nothing is sent automatically.",
-  "Черновик готов.": "Draft ready.",
-  "Мы открыли почтовое приложение и скопировали сообщение. Ничего не отправится, пока вы не нажмёте «Отправить».":
-    "We opened your email app and copied the message. Nothing is sent until you press Send.",
+  "Черновик подготовлен.": "Draft prepared.",
+  "Текст письма скопирован. Если почтовое приложение не открылось, вставьте его вручную.":
+    "The email text is copied. If your email app did not open, paste it manually.",
+  "Если почтовое приложение не открылось, скопируйте текст письма и отправьте его вручную.":
+    "If your email app did not open, copy the email text and send it manually.",
+  "Автокопирование недоступно. Выделите текст в поле ниже и скопируйте его вручную.":
+    "Automatic copying is unavailable. Select the text below and copy it manually.",
+  "Текст письма": "Email text",
+  "Скопировать текст": "Copy text",
+  "Написать вручную": "Email manually",
+  "Изменить данные": "Edit details",
   "Нажимая кнопку, вы тестируете только интерфейс. Отправки данных пока нет.":
     "This prototype only demonstrates the interface. No data is submitted yet.",
   "Вы в списке.": "You are on the list.",
   "В прототипе данные никуда не отправляются. Это демонстрация сценария.":
     "The prototype does not submit data yet. This is a demonstration of the flow.",
-  "Заполнить ещё раз": "Fill in again",
   "Маршруты без неприятных сюрпризов.": "Routes without unpleasant surprises.",
   "Покрытие не указано": "Surface not specified",
   "ground · проверить": "ground · review",
