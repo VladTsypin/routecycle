@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /routecycle/admin/
+
+Sitemap: https://vladtsypin.github.io/routecycle/sitemap.xml
+Host: https://vladtsypin.github.io/routecycle/

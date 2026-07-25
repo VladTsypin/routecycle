@@ -38,7 +38,7 @@ signals for the Estonia prototype.
 ## Capabilities and Constraints
 
 - `routecycle.com` is the public route-planner product entry point.
-- This repository builds a static Next.js validation landing, blog, and
+- This repository builds a static Vue 3 + Vite validation landing, blog, and
   content-admin surface.
 - The landing includes an interactive demonstration, not a production routing
   guarantee.

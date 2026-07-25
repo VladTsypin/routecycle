@@ -8,8 +8,8 @@
   --blue: #3c6df0;
   --green: #158367;
   --dark: #171b1a;
-  --mono: var(--font-plex-mono, Consolas), ui-monospace, SFMono-Regular, Consolas, monospace;
-  --sans: var(--font-manrope, Arial), Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, ui-monospace, SFMono-Regular, monospace;
+  --sans: "Manrope", Arial, sans-serif;
   --text-micro: 10px;
   --text-label: 11px;
   --text-small: 12px;
@@ -38,8 +38,8 @@ html {
 }
 
 body {
-  --mono: var(--font-plex-mono, Consolas), ui-monospace, SFMono-Regular, Consolas, monospace;
-  --sans: var(--font-manrope, Arial), Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, ui-monospace, SFMono-Regular, monospace;
+  --sans: "Manrope", Arial, sans-serif;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -110,6 +110,20 @@ p {
   height: 3px;
   background: var(--orange);
   transform-origin: left center;
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 280ms cubic-bezier(.22, 1, .36, 1),
+    transform 280ms cubic-bezier(.22, 1, .36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .site-header {
@@ -1298,6 +1312,7 @@ footer > div {
 }
 
 .footer-blog-link,
+.footer-test-front-cta,
 .footer-admin-link {
   min-height: 44px;
   display: inline-flex;
@@ -1307,6 +1322,7 @@ footer > div {
 }
 
 .footer-blog-link:hover,
+.footer-test-front-cta:hover,
 .footer-admin-link:hover {
   color: var(--orange);
 }
