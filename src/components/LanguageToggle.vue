@@ -16,9 +16,11 @@ function changeLanguage(event) {
 <template>
   <label class="language-picker" :for="id" data-language-toggle>
     <span class="language-picker-label">{{ tr('Language') }}</span>
-    <select :id="id" :value="language" :disabled="localeLoading" :aria-busy="localeLoading" @change="changeLanguage">
-      <option v-for="item in languages" :key="item.code" :value="item.code" :lang="item.code">{{ item.name }}</option>
-    </select>
+    <span class="language-picker-control">
+      <select :id="id" :value="language" :disabled="localeLoading" :aria-busy="localeLoading" @change="changeLanguage">
+        <option v-for="item in languages" :key="item.code" :value="item.code" :lang="item.code">{{ item.name }}</option>
+      </select>
+    </span>
     <span v-if="localeError" class="language-error" role="alert">{{ tr('Unable to load this language. Please try again.') }}</span>
   </label>
 </template>

@@ -142,7 +142,7 @@ onMounted(() => {
     if (saved && typeof saved === "object") {
       interestDraft.email = typeof saved.email === "string" ? saved.email : "";
       interestDraft.city = typeof saved.city === "string" ? saved.city : "";
-      interestDraft.bike = ["gravel", "touring", "mtb", "road"].includes(
+      interestDraft.bike = ["gravel", "touring", "road"].includes(
         saved.bike,
       )
         ? saved.bike
@@ -381,7 +381,7 @@ watch(
         </article>
         <article>
           <div class="step-visual step-visual--signals" aria-hidden="true">
-            <b>surface</b><b>access</b><b>mtb:scale</b><b>smoothness</b>
+            <b>surface</b><b>access</b><b>smoothness</b>
           </div>
           <h3>{{ tr('m_1c31ab3b5a') }}</h3>
           <p>{{ tr('m_0697afc24f') }}</p>
@@ -454,7 +454,6 @@ watch(
             <select v-model="interestDraft.bike" name="bike">
               <option value="gravel">{{ tr('m_1df7b3d338') }}</option>
               <option value="touring">{{ tr('m_996d7306c1') }}</option>
-              <option value="mtb">MTB</option>
               <option value="road">{{ tr('m_a22e0b1fc3') }}</option>
             </select>
           </label>

@@ -245,7 +245,7 @@ p {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0;
   flex: 0 0 auto;
   min-width: 0;
   color: inherit;
@@ -266,17 +266,29 @@ p {
   font-size: 12px;
   line-height: 1.2;
 }
+.language-picker-control {
+  position: relative;
+  display: block;
+}
+/* A compact visible frame inside the full-height native touch target. */
+.language-picker-control::before {
+  content: "";
+  position: absolute;
+  inset: 6px 0;
+  border: 1px solid currentColor;
+  pointer-events: none;
+}
 .language-picker select {
   font-family: inherit;
   font-size: 16px;
   color: inherit;
   background-color: transparent;
-  border: 1px solid currentColor;
+  border: 0;
   border-radius: 0;
   min-height: 44px;
-  width: 158px;
+  width: 136px;
   max-width: 100%;
-  padding: 8px 6px;
+  padding: 4px 8px;
   cursor: pointer;
 }
 .language-picker select option {

@@ -6,6 +6,9 @@ const browser = await chromium.launch({ channel: 'chrome' });
 try {
   const context = await browser.newContext({ locale: 'ru-RU', viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
+  await page.addInitScript(() => {
+    sessionStorage.setItem('routecycle-interest-draft', JSON.stringify({ bike: 'mtb' }));
+  });
   await page.goto(url);
   for (const language of ['ru', 'en', 'ru']) {
     await page.locator('[data-language-toggle]').waitFor();
@@ -13,6 +16,9 @@ try {
       await page.locator('[data-language-toggle] select').selectOption(language);
       await page.waitForFunction(lang => document.documentElement.lang === lang, language);
     }
+    assert.equal(await page.locator('select[name="bike"]').inputValue(), 'gravel');
+    assert.deepEqual(await page.locator('select[name="bike"] option').evaluateAll(options => options.map(option => option.value)), ['gravel', 'touring', 'road']);
+    assert.equal(/mtb/i.test(await page.locator('main').innerText()), false);
     const expected = language === 'en' ? ['Blog →', 'Demo', 'Admin'] : ['Блог →', 'Демо', 'Админка'];
     const selectors = ['.footer-blog-link', '.footer-test-front-cta', '.footer-admin-link'];
     const titles = language === 'en'
