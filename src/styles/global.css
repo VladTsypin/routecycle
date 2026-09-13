@@ -295,9 +295,13 @@ p {
   color: #171b18;
   background: #f4f2e9;
 }
-.language-picker select:focus-visible {
+.language-picker select:focus {
+  /* The matching focus indicator is drawn on the compact visible frame below. */
+  outline: none;
+}
+.language-picker-control:has(select:focus-visible)::before {
   outline: 2px solid currentColor;
-  outline-offset: 3px;
+  outline-offset: -2px;
 }
 .article-language-note {
   margin: 24px auto;
