@@ -1,5 +1,11 @@
 <script setup>
-defineProps({
+import { useTranslations } from "../composables/useLanguage";
+const { tr } = useTranslations();
+import { computed, nextTick, ref, useId, watch } from "vue";
+
+const props = defineProps({
+  interactive: { type: Boolean, default: false },
+  language: { type: String, default: "ru" },
   route: {
     type: Object,
     required: true,
@@ -9,23 +15,38 @@ defineProps({
     default: true,
   },
 });
+const gridId = `grid-${useId()}`;
+const panelId = `detail-${useId()}`;
+const selectedId = ref(null);
+const selected = computed(() => props.route.risks.find(risk => risk.id === selectedId.value));
+const detail = computed(() => selected.value ? Object.fromEntries(Object.entries(selected.value.details).map(([k,v]) => [k, tr(v)])) : null);
+const markerButtons = ref([]);
+watch(() => props.route, () => { selectedId.value = null; });
+function selectRisk(id) { selectedId.value = id; }
+async function closeDetail() {
+  const id = selectedId.value;
+  selectedId.value = null;
+  await nextTick();
+  markerButtons.value.find(button => button.dataset.riskId === id)?.focus();
+}
 </script>
 
 <template>
-  <div class="map-stage" :style="{ '--route-accent': route.accent }">
+  <div class="map-stage" :class="{ 'map-stage--interactive': interactive }" :style="{ '--route-accent': route.accent }" data-vue-i18n>
     <div class="map-meta">
       <span>58.3776° N</span>
       <span>TARTU / OTEPÄÄ</span>
       <span>26.7290° E</span>
     </div>
+    <div class="map-canvas">
     <svg
       class="map-svg"
       viewBox="0 0 960 480"
       role="img"
-      :aria-label="`Схема маршрута: ${route.label}`"
+      :aria-label="tr('m_ed6df46fea')"
     >
       <defs>
-        <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+        <pattern :id="gridId" width="48" height="48" patternUnits="userSpaceOnUse">
           <path
             d="M 48 0 L 0 0 0 48"
             fill="none"
@@ -35,7 +56,7 @@ defineProps({
         </pattern>
       </defs>
 
-      <rect width="960" height="480" class="map-grid" fill="url(#grid)" />
+      <rect width="960" height="480" class="map-grid" :fill="`url(#${gridId})`" />
 
       <g class="contours">
         <path d="M-15 62 C122 12 207 113 348 64 S622 9 762 71 S936 123 992 63" />
@@ -78,9 +99,10 @@ defineProps({
         :class="`risk-dot risk-dot--${risk.level}`"
         :transform="`translate(${risk.x} ${risk.y})`"
       >
+        <template v-if="!interactive">
         <circle r="13" />
         <circle r="4" />
-        <title>{{ risk.label }}</title>
+        </template>
       </g>
 
       <g class="map-labels">
@@ -90,11 +112,49 @@ defineProps({
         <text x="633" y="377">NÕO</text>
       </g>
     </svg>
+    <template v-if="interactive">
+      <button
+        v-for="(risk, index) in route.risks"
+        :key="risk.id"
+        ref="markerButtons"
+        type="button"
+        class="map-risk-button"
+        :class="[`risk-dot--${risk.level}`, { 'is-selected': selectedId === risk.id }]"
+        :style="{ left: `${risk.x / 9.6}%`, top: `${risk.y / 4.8}%` }"
+        :data-risk-id="risk.id"
+        :aria-label="tr('Section {number}: {title}', { number: index + 1, title: tr(risk.details.title) })"
+        :aria-expanded="selectedId === risk.id"
+        :aria-controls="panelId"
+        @click="selectRisk(risk.id)"
+        @keydown.esc="closeDetail"
+      ><span>{{ index + 1 }}</span></button>
+    </template>
+    </div>
 
     <div class="map-legend">
-      <span><i class="legend-dot legend-dot--safe" />Проверено</span>
-      <span><i class="legend-dot legend-dot--review" />Нужна проверка</span>
-      <span><i class="legend-dot legend-dot--warn" />Сложный участок</span>
+      <span><i class="legend-dot legend-dot--safe" />{{ tr('m_60d0189cfc') }}</span>
+      <span><i class="legend-dot legend-dot--review" />{{ tr('m_07297fa94a') }}</span>
+      <span><i class="legend-dot legend-dot--warn" />{{ tr('m_778bfcfbcf') }}</span>
+    </div>
+  </div>
+  <div v-if="interactive" :id="panelId" class="map-detail" data-vue-i18n @keydown.esc="closeDetail">
+    <div class="map-announcement" role="status" aria-atomic="true">{{ detail ? detail.title + '. ' + detail.explanation : '' }}</div>
+    <template v-if="detail">
+      <div class="map-detail-heading">
+        <h3>{{ detail.title }}</h3>
+        <button type="button" @click="closeDetail">{{ tr('m_7d9eb7acb1') }} <span aria-hidden="true">×</span></button>
+      </div>
+      <dl class="map-detail-facts">
+        <div><dt>{{ tr('m_0905f7f590') }}</dt><dd>{{ detail.surface }}</dd></div>
+        <div><dt>{{ tr('m_ec5ba0abb7') }}</dt><dd>{{ detail.access }}</dd></div>
+      </dl>
+      <p>{{ detail.explanation }}</p>
+      <p class="map-detail-advice">{{ detail.recommendation }}</p>
+    </template>
+    <div v-else class="map-detail-empty">
+      <span class="map-detail-index" aria-hidden="true">01 — 03</span>
+      <h3>{{ tr('m_47d5ebe6b6') }}</h3>
+      <p>{{ tr('m_87fcbdcead') }}</p>
     </div>
   </div>
 </template>

@@ -1,19 +1,19 @@
 <script setup>
 import { internalHref } from "../utils/links";
+import { useLanguage } from '../composables/useLanguage';
+import LanguageToggle from '../components/LanguageToggle.vue';
+const { language, toggleLanguage, tr } = useLanguage();
 
 document.title = "404 — Routecycle";
 </script>
 
 <template>
   <main class="not-found">
-    <p>404 · ROUTE NOT FOUND</p>
-    <h1>
-      Маршрут не найден.
-      <br />
-      <em>Route not found.</em>
-    </h1>
+    <LanguageToggle :language="language" @toggle="toggleLanguage" />
+    <p>404</p>
+    <h1>{{ tr('Route not found.') }}</h1>
     <a class="button button--primary" :href="internalHref()">
-      Вернуться к Routecycle
+      {{ tr('Back to Routecycle') }}
     </a>
   </main>
 </template>

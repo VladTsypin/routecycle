@@ -83,6 +83,7 @@ button {
 .skip-link:focus {
   transform: translateY(0);
 }
+.skip-link:not(:focus) { visibility: hidden; }
 
 :where(a, button, input, select, textarea):focus-visible {
   outline: 2px solid var(--orange);
@@ -127,11 +128,12 @@ p {
 }
 
 .site-header {
-  height: 76px;
+  min-height: 76px;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 20px;
   align-items: center;
-  padding: 0 4vw;
+  padding: 8px 4vw;
   border-bottom: 1px solid var(--line);
   position: relative;
   z-index: 10;
@@ -171,7 +173,8 @@ p {
 
 .site-header nav {
   display: flex;
-  gap: 34px;
+  gap: clamp(8px, 1.3vw, 20px);
+  justify-content: center;
   font-size: 12px;
   font-weight: 600;
 }
@@ -237,6 +240,72 @@ p {
   letter-spacing: .08em;
 }
 
+/* Native select keeps 28 locales usable with touch, keyboard and screen readers. */
+.language-picker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 0 0 auto;
+  min-width: 0;
+  color: inherit;
+}
+.language-error {
+  position: absolute;
+  top: 100%;
+  inset-inline-end: 0;
+  width: min(260px, 80vw);
+  padding: 12px;
+  background: #f4f2e9;
+  color: #171b18;
+  border: 1px solid currentColor;
+  z-index: 30;
+  font-size: 14px;
+}
+.language-picker-label {
+  font-size: 12px;
+  line-height: 1.2;
+}
+.language-picker select {
+  font-family: inherit;
+  font-size: 16px;
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  min-height: 44px;
+  width: 158px;
+  max-width: 100%;
+  padding: 8px 6px;
+  cursor: pointer;
+}
+.language-picker select option {
+  color: #171b18;
+  background: #f4f2e9;
+}
+.language-picker select:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.article-language-note {
+  margin: 24px auto;
+  max-width: 850px;
+  padding: 16px;
+  border-inline-start: 3px solid var(--accent, #f0542d);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.site-header nav, .header-actions, .blog-header-actions { min-width: 0; }
+.site-header nav a, .route-tabs button, .button, .map-detail button { overflow-wrap: anywhere; }
+@media (max-width: 540px) {
+  .language-picker select { width: 126px; }
+  .site-header .header-actions { gap: 8px; }
+  .site-header .brand { font-size: 12px; gap: 5px; }
+  .site-header .header-cta { display: none; }
+  .blog-header { flex-wrap: wrap; gap: 16px; }
+  .blog-header-actions { flex-wrap: wrap; }
+}
+
 .language-toggle span {
   transition: color 150ms ease;
 }
@@ -258,7 +327,8 @@ p {
 
 .header-cta svg,
 .button svg,
-.route-summary button svg {
+.route-summary button svg,
+.route-summary > a svg {
   width: 18px;
   fill: none;
   stroke: currentColor;
@@ -268,7 +338,8 @@ p {
 
 .header-cta:hover svg,
 .button:hover svg,
-.route-summary button:hover svg {
+.route-summary button:hover svg,
+.route-summary > a:hover svg {
   transform: translateX(4px);
 }
 
@@ -463,6 +534,58 @@ p {
 .ticket-score small {
   font: 10px var(--mono);
 }
+
+.hero-product-note { margin-top: 20px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.demo-disclaimer { max-width: 760px; margin: -12px 0 28px; color: #c5c8c2; font-size: 14px; line-height: 1.65; }
+.map-canvas { position: relative; height: 100%; }
+.map-stage--interactive .map-canvas { height: auto; aspect-ratio: 2 / 1; margin-block: 20px; }
+.map-stage.map-stage--interactive .map-meta { position: static; padding: 18px 20px 0; }
+.map-stage--interactive .map-legend { position: static; padding: 0 20px 20px; gap: 12px 20px; }
+.planner-map .map-stage.map-stage--interactive { min-height: 0; align-self: start; }
+.planner-map:has(.map-detail) { grid-template-rows: auto 1fr auto; }
+.map-risk-button { position: absolute; transform: translate(-50%, -50%); width: 44px; height: 44px; padding: 0; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer; border-radius: 50%; }
+.map-risk-button span { display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid currentColor; border-radius: 50%; background: #202523; font: 600 13px var(--mono); }
+.map-risk-button:hover span, .map-risk-button.is-selected span { background: currentColor; }
+.map-risk-button:hover span, .map-risk-button.is-selected span { box-shadow: 0 0 0 4px #202523, 0 0 0 6px currentColor; }
+.map-risk-button:hover span, .map-risk-button.is-selected span { background: #f2efe6; color: #202523; border-color: #f2efe6; }
+.map-risk-button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.map-detail { padding: 24px; background: #252c29; color: #f2efe6; border-top: 1px solid #48514b; }
+.map-announcement { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+.map-detail-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.map-detail h3 { margin: 0; font: 600 20px/1.4 var(--sans, 'Manrope', sans-serif); letter-spacing: -.02em; }
+.map-detail p { margin: 16px 0 0; max-width: 65ch; font-size: 16px; line-height: 1.65; color: #d2d7d1; }
+.map-detail-heading button { min-height: 44px; margin-top: -8px; padding: 8px 12px; display: flex; align-items: center; gap: 12px; color: #f2efe6; border: 1px solid #748077; background: transparent; font: inherit; cursor: pointer; }
+.map-detail-heading button:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.map-detail-facts { display: flex; flex-wrap: wrap; gap: 20px 40px; margin: 20px 0; }
+.map-detail-facts dt { color: #b9c2b9; font: 12px/1.5 var(--mono); }
+.map-detail-facts dd { margin: 4px 0 0; font-size: 16px; }
+.map-detail .map-detail-advice { padding-top: 14px; border-top: 1px solid #48514b; color: #f2efe6; }
+.map-detail-index { display: block; font: 12px var(--mono); color: #b9c2b9; margin-bottom: 16px; }
+.route-summary > a { text-decoration: none; gap: 14px; }
+.garmin-section { padding: var(--section-space) 4vw; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 96px); border-bottom: 1px solid var(--line); }
+.garmin-copy h2 { max-width: 16ch; margin: 16px 0 20px; font-size: clamp(30px, 3vw, 44px); line-height: 1.15; letter-spacing: -.035em; }
+.garmin-copy > p:not(.eyebrow) { max-width: 50ch; font-size: 17px; line-height: 1.7; color: var(--muted); }
+.garmin-copy .button { margin-top: 24px; white-space: normal; }
+.garmin-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 28px; align-content: center; }
+.garmin-steps li { display: grid; grid-template-columns: 32px 1fr; gap: 18px; }
+.garmin-steps li > span { padding-top: 4px; color: var(--muted); font: 12px var(--mono); }
+.garmin-steps h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.4; }
+.garmin-steps p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 42ch; }
+@media (max-width: 700px) {
+  .garmin-section { grid-template-columns: 1fr; padding-inline: 20px; gap: 32px; }
+  .garmin-copy .button { width: 100%; }
+  .map-detail { padding: 20px; }
+  .map-detail-heading { flex-wrap: wrap; }
+  .map-detail-heading button { margin-top: 0; }
+  .map-stage--interactive .map-legend { font-size: 10px; }
+  .demo-disclaimer { margin-top: 0; }
+  .route-summary > a { min-height: 72px; grid-column: 1 / -1; padding: 16px 20px; font-size: 12px; }
+}
+.map-stage--interactive .route-line { animation: none; stroke-dashoffset: 0; stroke-dasharray: none; }
+.demo-settings summary { min-height: 44px; padding-block: 12px; cursor: pointer; color: #e9ede6; font-size: 14px; }
+.demo-settings[open] summary { margin-bottom: 16px; }
+.demo-settings summary:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.demo-settings .confidence-card { margin-top: 0; }
 
 .map-stage {
   position: relative;
@@ -944,7 +1067,8 @@ p {
   font: 22px var(--mono);
 }
 
-.route-summary button {
+.route-summary button,
+.route-summary > a {
   border: 0;
   padding: 0 25px;
   display: flex;
@@ -958,7 +1082,8 @@ p {
   transition: background 180ms ease, transform 180ms ease;
 }
 
-.route-summary button:hover {
+.route-summary button:hover,
+.route-summary > a:hover {
   background: var(--orange);
 }
 
@@ -1362,6 +1487,7 @@ footer > div {
 .control-label,
 .confidence-card > span,
 .route-summary button,
+.route-summary > a,
 .manifesto > p,
 .waitlist-form label > span,
 .form-success button {
@@ -2021,7 +2147,8 @@ footer > p {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .route-summary button {
+  .route-summary button,
+  .route-summary > a {
     grid-column: 1 / -1;
     min-height: 60px;
   }

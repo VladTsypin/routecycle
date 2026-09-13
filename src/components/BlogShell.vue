@@ -1,4 +1,6 @@
 <script setup>
+import { useTranslations } from "../composables/useLanguage";
+const { tr } = useTranslations();
 import BrandMark from "./BrandMark.vue";
 import LanguageToggle from "./LanguageToggle.vue";
 import { useLanguage } from "../composables/useLanguage";
@@ -21,9 +23,7 @@ const { language, toggleLanguage } = useLanguage(props);
         class="brand"
         :href="internalHref()"
         :aria-label="
-          language === 'en'
-            ? 'Routecycle — home'
-            : 'Routecycle — на главную'
+          tr('m_0ec2acb529')
         "
       >
         <BrandMark />
@@ -31,11 +31,19 @@ const { language, toggleLanguage } = useLanguage(props);
       </a>
       <div class="blog-header-actions">
         <a class="blog-product-link" :href="internalHref()">
-          {{ language === "en" ? "Product" : "Продукт" }}
+          {{ tr('m_fb9ef89417') }}
         </a>
         <LanguageToggle :language="language" @toggle="toggleLanguage" />
       </div>
     </header>
-    <slot :name="language === 'en' ? 'english' : 'russian'" />
+    <slot v-if="$slots.default" />
+    <template v-else>
+      <p v-if="!['ru', 'en'].includes(language)" class="article-language-note">
+        {{ tr('Article available in English and Russian. Showing the English version.') }}
+      </p>
+      <div :lang="language === 'ru' ? 'ru' : 'en'">
+        <slot :name="language === 'ru' ? 'russian' : 'english'" />
+      </div>
+    </template>
   </div>
 </template>

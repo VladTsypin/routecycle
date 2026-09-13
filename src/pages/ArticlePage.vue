@@ -1,10 +1,11 @@
 <script setup>
+import { computed } from 'vue';
 import BlogShell from "../components/BlogShell.vue";
 import { internalHref } from "../utils/links";
 
 const productUrl =
   "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_blog&utm_content=article_cta";
-const blogHref = internalHref("blog/");
+const blogHref = computed(() => internalHref("blog/"));
 </script>
 
 <template>

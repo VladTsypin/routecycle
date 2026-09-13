@@ -1,121 +1,65 @@
 <script setup>
+import { useTranslations } from "../composables/useLanguage";
+const { tr, formatNumber } = useTranslations();
 import { computed, onMounted, ref, watch } from "vue";
+import LanguageToggle from "../components/LanguageToggle.vue";
+import { useLanguage } from "../composables/useLanguage";
 import TestIcon from "../components/TestIcon.vue";
 import { internalHref } from "../utils/links";
 
 const copy = {
-  ru: {
-    back: "Вернуться на лендинг",
-    title: "Спланируйте следующую поездку",
-    test: "ТЕСТОВЫЙ ФРОНТ",
-    info: "Информация о прототипе",
-    language: "Переключить язык",
-    support: "Поддержать проект",
-    strava: "Открыть Routecycle",
-    settings: "Сменить тему",
-    parameters: "Параметры маршрута",
-    road: "Шоссе",
-    gravel: "Гравий",
-    circle: "Круговой",
-    oneWay: "В одну сторону",
-    start: "Стартовая точка",
-    stop: "Конечная точка",
-    distance: "Дистанция",
-    time: "Время",
-    distanceKm: "Дистанция, км",
-    attractions: "Искать достопримечательности",
-    getRoutes: "Построить маршруты",
-    getMoreRoutes: "Показать ещё маршруты",
-    building: "Строим варианты…",
-    routes: "Маршруты",
-    current: "Текущие",
-    favorites: "Избранное",
-    history: "История",
-    emptyFavorites: "Избранных маршрутов пока нет.",
-    emptyHistory: "История появится после сохранения маршрута.",
-    map: "Схематическая карта тестового маршрута",
-    zoomIn: "Увеличить карту",
-    zoomOut: "Уменьшить карту",
-    mapLayers: "Слои карты",
-    save: "Сохранить",
-    private: "Приватность",
-    share: "Поделиться",
-    reverse: "Развернуть",
-    export: "Экспорт",
-    elevation: "Профиль высоты",
-    points: "Точки интереса",
-    photos: "Фото маршрута",
-    low: "Низшая точка",
-    high: "Высшая точка",
-    maxGrade: "Макс. уклон",
-    prototypeNote:
-      "Фронтенд-прототип: маршрут и показатели демонстрационные. Проверяйте ограничения, доступ и состояние дороги перед поездкой.",
-    aboutTitle: "О тестовом фронте",
-    aboutBody:
-      "Это адаптивная Vue-версия интерфейса Routecycle. Она не обращается к боевому маршрутизатору и ничего не сохраняет.",
-    close: "Закрыть",
-    gravelTitle: "Гравийный режим скоро появится",
-    gravelBody:
-      "Тестовая версия сохраняет сценарий предварительного уведомления без сбора email.",
-    statusBuilt: "Показаны три демонстрационных маршрута.",
-    statusAction: "Действие выполнено только в этой сессии прототипа.",
-  },
-  en: {
-    back: "Back to the landing page",
-    title: "Plan your next ride",
-    test: "TEST FRONT",
-    info: "About this prototype",
-    language: "Switch language",
-    support: "Support the project",
-    strava: "Open Routecycle",
-    settings: "Change theme",
-    parameters: "Route parameters",
-    road: "Road",
-    gravel: "Gravel",
-    circle: "Circle",
-    oneWay: "One way",
-    start: "Start point",
-    stop: "Destination",
-    distance: "Distance",
-    time: "Time",
-    distanceKm: "Distance in km",
-    attractions: "Find attractions",
-    getRoutes: "Get routes",
-    getMoreRoutes: "Get More Routes",
-    building: "Building options…",
-    routes: "Routes",
-    current: "Current",
-    favorites: "Favorites",
-    history: "History",
-    emptyFavorites: "No favorite routes yet.",
-    emptyHistory: "History appears after you save a route.",
-    map: "Schematic map of the test route",
-    zoomIn: "Zoom map in",
-    zoomOut: "Zoom map out",
-    mapLayers: "Map layers",
-    save: "Save",
-    private: "Private",
-    share: "Share",
-    reverse: "Reverse",
-    export: "Export",
-    elevation: "Elevation profile",
-    points: "Points of interest",
-    photos: "Route photos",
-    low: "Lowest point",
-    high: "Highest point",
-    maxGrade: "Max grade",
-    prototypeNote:
-      "Frontend prototype: route and metrics are illustrative. Check restrictions, access and road conditions before riding.",
-    aboutTitle: "About the test frontend",
-    aboutBody:
-      "This is a responsive Vue version of the Routecycle interface. It does not call the production router or persist data.",
-    close: "Close",
-    gravelTitle: "Gravel mode is coming soon",
-    gravelBody:
-      "The test version preserves the early-access notice without collecting an email address.",
-    statusBuilt: "Three demonstration routes are shown.",
-    statusAction: "The action was applied in this prototype session only.",
-  },
+  "back": "m_4e8dcbd4c4",
+  "title": "m_23691de10b",
+  "test": "m_070f80367c",
+  "info": "m_e76e2c7f89",
+  "language": "m_361335922f",
+  "support": "m_d67c05cd35",
+  "strava": "m_5797008dd2",
+  "settings": "m_db1de510bc",
+  "parameters": "m_fec6823a58",
+  "road": "m_a22e0b1fc3",
+  "gravel": "m_1df7b3d338",
+  "circle": "m_b93d3bcecf",
+  "oneWay": "m_b18567ea52",
+  "start": "m_ee1dd1bf29",
+  "stop": "m_293d404a50",
+  "distance": "m_b7bdf7a2d6",
+  "time": "m_33b93476cf",
+  "distanceKm": "m_6cbbf203ca",
+  "attractions": "m_acfc276b25",
+  "getRoutes": "m_e2bfad4f15",
+  "getMoreRoutes": "m_7231dc252e",
+  "building": "m_32e34634b0",
+  "routes": "m_2c5b669bcd",
+  "current": "m_e0d1b68224",
+  "favorites": "m_7a1f2a83ac",
+  "history": "m_0e76960093",
+  "emptyFavorites": "m_c171a54911",
+  "emptyHistory": "m_880c37d63c",
+  "map": "m_5845c1523a",
+  "zoomIn": "m_1a22b70b8f",
+  "zoomOut": "m_b036296b94",
+  "mapLayers": "m_5af504643b",
+  "save": "m_1509f561f2",
+  "private": "m_c63eb6720c",
+  "share": "m_29887a5ff9",
+  "reverse": "m_fae1c6f105",
+  "export": "m_3664895579",
+  "elevation": "m_179bcabb88",
+  "points": "m_c075daf67a",
+  "photos": "m_8a8ce7ba13",
+  "low": "m_7c37f6fe21",
+  "high": "m_68ca5d4892",
+  "maxGrade": "m_534bec512f",
+  "prototypeNote": "m_7914eca062",
+  "aboutTitle": "m_766fc6a20a",
+  "aboutBody": "m_63b1293ea3",
+  "close": "m_7d9eb7acb1",
+  "gravelTitle": "m_66065e7cba",
+  "gravelBody": "m_7eb0776f21",
+  "gravelCta": "m_836564ef04",
+  "statusBuilt": "m_1482eb8f9b",
+  "statusAction": "m_0f2f520f92"
 };
 
 const routeOptions = [
@@ -142,10 +86,7 @@ const routeOptions = [
   },
 ];
 
-const savedLanguage = window.localStorage.getItem("routecycle-language");
-const language = ref(
-  savedLanguage === "ru" || savedLanguage === "en" ? savedLanguage : "ru",
-);
+const { language, toggleLanguage } = useLanguage({ titleEn: "Routecycle — frontend prototype", titleRu: "Routecycle — тестовый интерфейс" });
 const dark = ref(false);
 const parametersOpen = ref(true);
 const routesOpen = ref(true);
@@ -163,7 +104,7 @@ const status = ref("");
 const zoom = ref(1);
 const layerAlt = ref(false);
 const reversed = ref(false);
-const t = computed(() => copy[language.value]);
+const t = computed(() => Object.fromEntries(Object.entries(copy).map(([k,v]) => [k, tr(v)])));
 const activeRoute = computed(() => routeOptions[selectedRoute.value]);
 const routePath = computed(() =>
   shape.value === "oneWay"
@@ -171,10 +112,7 @@ const routePath = computed(() =>
     : activeRoute.value.path,
 );
 
-function toggleLanguage() {
-  language.value = language.value === "ru" ? "en" : "ru";
-  status.value = "";
-}
+
 
 function buildRoutes() {
   building.value = true;
@@ -192,14 +130,7 @@ function action() {
   status.value = t.value.statusAction;
 }
 
-watch(language, (value) => {
-  window.localStorage.setItem("routecycle-language", value);
-  document.documentElement.lang = value;
-  document.title =
-    value === "en"
-      ? "Routecycle — frontend prototype"
-      : "Routecycle — тестовый интерфейс";
-});
+watch(language, () => { status.value = ""; });
 
 onMounted(() => {
   document.documentElement.lang = language.value;
@@ -238,14 +169,7 @@ onMounted(() => {
         >
           <TestIcon name="info" />
         </button>
-        <button
-          :class="$style.languageButton"
-          type="button"
-          :aria-label="t.language"
-          @click="toggleLanguage"
-        >
-          {{ language.toUpperCase() }}
-        </button>
+        <LanguageToggle :language="language" @toggle="toggleLanguage" />
       </header>
 
       <div :class="$style.projectLinks">
@@ -322,7 +246,7 @@ onMounted(() => {
           </label>
           <div :class="$style.locationRow">
             <input id="test-start" value="Dorpat, Soola 6, Tartu, Estonia" />
-            <button :class="$style.iconButton" type="button" aria-label="Location">
+            <button :class="$style.iconButton" type="button" :aria-label="tr('m_15b61974b2')">
               <TestIcon name="target" />
             </button>
           </div>
@@ -354,7 +278,7 @@ onMounted(() => {
             </button>
           </div>
           <label v-if="metric === 'distance'" :class="$style.rangeField">
-            <span>{{ t.distanceKm }}</span><strong>{{ distance }} km</strong>
+            <span>{{ t.distanceKm }}</span><strong>{{ distance }} {{ tr('m_1f34503f65') }}</strong>
             <input v-model.number="distance" type="range" min="20" max="100" />
           </label>
           <label :class="$style.switchRow">
@@ -413,11 +337,11 @@ onMounted(() => {
               :class="{ [$style.activeRoute]: selectedRoute === index }"
               @click="selectedRoute = index"
             >
-              <span><TestIcon name="route" />{{ option.distance }} km</span>
-              <span><TestIcon name="mountain" />{{ option.ascent }} m</span>
+              <span><TestIcon name="route" />{{ option.distance }} {{ tr('m_1f34503f65') }}</span>
+              <span><TestIcon name="mountain" />{{ option.ascent }} {{ tr('m_62c66a7a5d') }}</span>
               <span>
                 <TestIcon name="clock" />
-                {{ language === "ru" ? option.time : option.timeEn }}
+                {{ tr(option.timeEn) }}
               </span>
             </button>
           </div>
@@ -435,7 +359,7 @@ onMounted(() => {
       </p>
       <div :class="$style.sidebarFooter">
         <a :href="internalHref()">{{ t.back }}</a>
-        <span>ROUTECYCLE · 2026</span>
+        <span>{{ tr('m_534f4a6d93') }}</span>
       </div>
     </aside>
 
@@ -506,8 +430,8 @@ onMounted(() => {
             <TestIcon name="layers" />
           </button>
         </div>
-        <span :class="$style.mapScale">2 km</span>
-        <p :class="$style.mapCredit">SCHEMATIC MAP · TEST DATA</p>
+        <span :class="$style.mapScale">{{ tr('m_1955c89cab') }}</span>
+        <p :class="$style.mapCredit">{{ tr('m_c1c65eae91') }}</p>
 
         <nav v-if="generated" :class="$style.routeActions" :aria-label="t.routes">
           <button
@@ -558,9 +482,9 @@ onMounted(() => {
             />
           </svg>
           <dl :class="$style.metrics">
-            <div><dt>{{ t.low }}</dt><dd>29 m</dd></div>
-            <div><dt>{{ t.high }}</dt><dd>90 m</dd></div>
-            <div><dt>{{ t.distance }}</dt><dd>{{ activeRoute.distance }}.9 km</dd></div>
+            <div><dt>{{ t.low }}</dt><dd>{{ tr('m_aacabcda50') }}</dd></div>
+            <div><dt>{{ t.high }}</dt><dd>{{ tr('m_16fcd0f98e') }}</dd></div>
+            <div><dt>{{ t.distance }}</dt><dd>{{ formatNumber(activeRoute.distance + 0.9) }} {{ tr('m_1f34503f65') }}</dd></div>
             <div><dt>{{ t.maxGrade }}</dt><dd>+12%</dd></div>
           </dl>
         </div>
@@ -596,6 +520,7 @@ onMounted(() => {
           {{ modal === "gravel" ? t.gravelTitle : t.aboutTitle }}
         </h2>
         <span>{{ modal === "gravel" ? t.gravelBody : t.aboutBody }}</span>
+        <a v-if="modal === 'gravel'" href="https://routecycle.com/?utm_source=github_pages&amp;utm_medium=referral&amp;utm_campaign=routecycle_landing&amp;utm_content=test_gravel" style="display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; text-decoration: underline;">{{ t.gravelCta }}</a>
         <button :class="$style.primaryButton" type="button" @click="modal = ''">
           {{ t.close }}
         </button>

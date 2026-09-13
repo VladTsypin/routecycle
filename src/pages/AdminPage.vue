@@ -1,4 +1,6 @@
 <script setup>
+import { useTranslations } from "../composables/useLanguage";
+const { tr, formatDate } = useTranslations();
 import BlogShell from "../components/BlogShell.vue";
 import { internalHref } from "../utils/links";
 
@@ -21,143 +23,39 @@ const github = {
     description-ru="Управление контентом лендинга и блога Routecycle."
     description-en="Manage Routecycle landing page and blog content."
   >
-    <template #russian>
+
+
+    <template #default>
       <main class="admin-shell">
-        <p class="blog-kicker">CONTENT ADMIN · ROUTECYCLE</p>
-        <h1>Управление контентом.</h1>
-        <p class="admin-intro">
-          Редактируйте лендинг и материалы блога из одного места. Доступ к
-          сохранению проверяет GitHub: изменения сможет публиковать только
-          участник репозитория с правом записи.
-        </p>
-
-        <section class="admin-section" aria-labelledby="admin-blog-ru">
-          <header>
-            <div><span>01</span><h2 id="admin-blog-ru">Блог</h2></div>
-            <p>1 опубликованный материал</p>
-          </header>
-          <article class="admin-content-row">
-            <div class="admin-content-meta">
-              <span>Опубликовано</span>
-              <time datetime="2026-07-20">20.07.2026</time>
-            </div>
-            <div>
-              <p>RU / EN · 6 минут</p>
-              <h3>Почему линия на карте ещё не означает хороший веломаршрут</h3>
-            </div>
-            <div class="admin-row-actions">
-              <a
-                class="admin-action"
-                :href="internalHref('blog/why-a-line-is-not-a-route/')"
-              >
-                Открыть
-              </a>
-              <a
-                class="admin-action admin-action--primary"
-                :href="github.article"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Редактировать ↗
-              </a>
-            </div>
-          </article>
-          <div class="admin-secondary-actions">
-            <a
-              class="admin-action"
-              :href="github.blogIndex"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Редактировать список статей ↗
-            </a>
-          </div>
-        </section>
-
-        <section class="admin-section" aria-labelledby="admin-landing-ru">
-          <header>
-            <div><span>02</span><h2 id="admin-landing-ru">Лендинг</h2></div>
-            <p>RU / EN · GitHub Pages</p>
-          </header>
-          <div class="admin-landing-row">
-            <div>
-              <p>Главная страница</p>
-              <h3>Routecycle — маршруты без неприятных сюрпризов</h3>
-            </div>
-            <div class="admin-row-actions">
-              <a class="admin-action" :href="internalHref()">Открыть</a>
-              <a
-                class="admin-action admin-action--primary"
-                :href="github.landing"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Редактировать ↗
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <aside class="admin-publish-note">
-          <div>
-            <span>Как публикуются изменения</span>
-            <p>
-              Нажмите «Редактировать», войдите в GitHub, внесите изменения и
-              сохраните commit в ветку main. GitHub Pages автоматически
-              пересоберёт сайт.
-            </p>
-          </div>
-          <a
-            class="admin-action"
-            :href="github.deploy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Статус публикации ↗
-          </a>
-        </aside>
-      </main>
-    </template>
-
-    <template #english>
-      <main class="admin-shell">
-        <p class="blog-kicker">CONTENT ADMIN · ROUTECYCLE</p>
-        <h1>Content management.</h1>
-        <p class="admin-intro">
-          Edit the landing page and blog from one place. GitHub controls write
-          access, so only repository collaborators with permission can publish
-          changes.
-        </p>
+        <p class="blog-kicker">{{ tr('m_a388ec33f3') }}</p>
+        <h1>{{ tr('m_24be9b64d3') }}</h1>
+        <p class="admin-intro"> {{ tr('m_8ac85ffe6a') }} </p>
 
         <section class="admin-section" aria-labelledby="admin-blog-en">
           <header>
-            <div><span>01</span><h2 id="admin-blog-en">Blog</h2></div>
-            <p>1 published article</p>
+            <div><span>01</span><h2 id="admin-blog-en">{{ tr('m_8c6bc09953') }}</h2></div>
+            <p>{{ tr('m_621b484a9f') }}</p>
           </header>
           <article class="admin-content-row">
             <div class="admin-content-meta">
-              <span>Published</span>
-              <time datetime="2026-07-20">20 JUL 2026</time>
+              <span>{{ tr('m_2ef42ec21d') }}</span>
+              <time datetime="2026-07-20">{{ formatDate('2026-07-20') }}</time>
             </div>
             <div>
-              <p>RU / EN · 6 min read</p>
-              <h3>Why a line on the map is not yet a good cycling route</h3>
+              <p>{{ tr('m_cf4d46997a') }}</p>
+              <h3>{{ tr('m_010a9ce321') }}</h3>
             </div>
             <div class="admin-row-actions">
               <a
                 class="admin-action"
                 :href="internalHref('blog/why-a-line-is-not-a-route/')"
-              >
-                Open
-              </a>
+              > {{ tr('m_ed077f3d81') }} </a>
               <a
                 class="admin-action admin-action--primary"
                 :href="github.article"
                 target="_blank"
                 rel="noreferrer"
-              >
-                Edit ↗
-              </a>
+              > {{ tr('m_4795ffcd9e') }} </a>
             </div>
           </article>
           <div class="admin-secondary-actions">
@@ -166,52 +64,43 @@ const github = {
               :href="github.blogIndex"
               target="_blank"
               rel="noreferrer"
-            >
-              Edit article list ↗
-            </a>
+            > {{ tr('m_482d8b6437') }} </a>
           </div>
         </section>
 
         <section class="admin-section" aria-labelledby="admin-landing-en">
           <header>
-            <div><span>02</span><h2 id="admin-landing-en">Landing page</h2></div>
-            <p>RU / EN · GitHub Pages</p>
+            <div><span>02</span><h2 id="admin-landing-en">{{ tr('m_615e54d4d3') }}</h2></div>
+            <p>{{ tr('m_600ff412f5') }}</p>
           </header>
           <div class="admin-landing-row">
             <div>
-              <p>Home page</p>
-              <h3>Routecycle — cycling routes without unpleasant surprises</h3>
+              <p>{{ tr('m_11d58b08de') }}</p>
+              <h3>{{ tr('m_478880590a') }}</h3>
             </div>
             <div class="admin-row-actions">
-              <a class="admin-action" :href="internalHref()">Open</a>
+              <a class="admin-action" :href="internalHref()">{{ tr('m_ed077f3d81') }}</a>
               <a
                 class="admin-action admin-action--primary"
                 :href="github.landing"
                 target="_blank"
                 rel="noreferrer"
-              >
-                Edit ↗
-              </a>
+              > {{ tr('m_4795ffcd9e') }} </a>
             </div>
           </div>
         </section>
 
         <aside class="admin-publish-note">
           <div>
-            <span>How publishing works</span>
-            <p>
-              Select “Edit”, sign in to GitHub, make the change, and commit it to
-              main. GitHub Pages will rebuild the site automatically.
-            </p>
+            <span>{{ tr('m_05363b151b') }}</span>
+            <p> {{ tr('m_f3a8897c36') }} </p>
           </div>
           <a
             class="admin-action"
             :href="github.deploy"
             target="_blank"
             rel="noreferrer"
-          >
-            Deployment status ↗
-          </a>
+          > {{ tr('m_37c880dcfd') }} </a>
         </aside>
       </main>
     </template>

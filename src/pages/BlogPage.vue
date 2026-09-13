@@ -1,8 +1,11 @@
 <script setup>
+import { useTranslations } from "../composables/useLanguage";
+import { computed } from 'vue';
+const { tr, formatDate } = useTranslations();
 import BlogShell from "../components/BlogShell.vue";
 import { internalHref } from "../utils/links";
 
-const articleHref = internalHref("blog/why-a-line-is-not-a-route/");
+const articleHref = computed(() => internalHref("blog/why-a-line-is-not-a-route/"));
 </script>
 
 <template>
@@ -12,76 +15,32 @@ const articleHref = internalHref("blog/why-a-line-is-not-a-route/");
     description-ru="Практические материалы о качестве веломаршрутов, покрытии, доступе и данных OpenStreetMap."
     description-en="Practical notes on cycling route quality, surfaces, access and OpenStreetMap data."
   >
-    <template #russian>
-      <main class="blog-index">
-        <p class="blog-kicker">ROUTECYCLE JOURNAL · 01</p>
-        <h1>Маршруты, данные и то, что скрыто между точками.</h1>
-        <p class="blog-index-intro">
-          Практические разборы о том, как заранее замечать плохое покрытие,
-          закрытые проезды и участки, где уверенность данных ниже обычной.
-        </p>
 
-        <section class="blog-list" aria-label="Статьи">
+
+    <template #default>
+      <main class="blog-index">
+        <p class="blog-kicker">{{ tr('m_3ad36a2c05') }}</p>
+        <h1>{{ tr('m_44d756ef60') }}</h1>
+        <p class="blog-index-intro"> {{ tr('m_6ea2ebc161') }} </p>
+
+        <section class="blog-list" :aria-label="tr('m_b14ac78a46')">
           <article class="blog-list-item">
             <div class="blog-list-meta">
-              <time datetime="2026-07-20">20.07.2026</time>
-              <span>6 минут</span>
+              <time datetime="2026-07-20">{{ formatDate('2026-07-20') }}</time>
+              <span>{{ tr('m_b8a5508af9') }}</span>
+              <span>{{ tr('Read in English or Russian') }}</span>
             </div>
             <div>
-              <p>МЕТОД · ДАННЫЕ</p>
+              <p>{{ tr('m_35edc67a5d') }}</p>
               <h2>
-                <a :href="articleHref">
-                  Почему линия на карте ещё не означает хороший веломаршрут
-                </a>
+                <a :href="articleHref"> {{ tr('m_010a9ce321') }} </a>
               </h2>
-              <p class="blog-list-description">
-                Какие сигналы покрытия, доступа и проезжаемости стоит проверить,
-                прежде чем доверять красивой линии на экране.
-              </p>
+              <p class="blog-list-description"> {{ tr('m_4cf72d073f') }} </p>
             </div>
             <a
               class="blog-list-arrow"
               :href="articleHref"
-              aria-label="Читать статью"
-            >
-              →
-            </a>
-          </article>
-        </section>
-      </main>
-    </template>
-
-    <template #english>
-      <main class="blog-index">
-        <p class="blog-kicker">ROUTECYCLE JOURNAL · 01</p>
-        <h1>Routes, data and what hides between the points.</h1>
-        <p class="blog-index-intro">
-          Practical notes on spotting poor surfaces, restricted access and
-          low-confidence data before a ride begins.
-        </p>
-
-        <section class="blog-list" aria-label="Articles">
-          <article class="blog-list-item">
-            <div class="blog-list-meta">
-              <time datetime="2026-07-20">20 JUL 2026</time>
-              <span>6 min read</span>
-            </div>
-            <div>
-              <p>METHOD · DATA</p>
-              <h2>
-                <a :href="articleHref">
-                  Why a line on the map is not yet a good cycling route
-                </a>
-              </h2>
-              <p class="blog-list-description">
-                The surface, access and rideability signals worth checking
-                before trusting a clean-looking line on a screen.
-              </p>
-            </div>
-            <a
-              class="blog-list-arrow"
-              :href="articleHref"
-              aria-label="Read the article"
+              :aria-label="tr('m_d70e40a074')"
             >
               →
             </a>
