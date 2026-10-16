@@ -86,7 +86,7 @@ const routeOptions = [
   },
 ];
 
-const { language, toggleLanguage } = useLanguage({ titleEn: "Routecycle — frontend prototype", titleRu: "Routecycle — тестовый интерфейс" });
+const { language, toggleLanguage } = useLanguage({ titleEn: "m_e30a2c7b9d", titleRu: "Routecycle — тестовый интерфейс" });
 const dark = ref(false);
 const parametersOpen = ref(true);
 const routesOpen = ref(true);

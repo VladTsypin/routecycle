@@ -58,11 +58,10 @@ const interestDraft = reactive({
 
 const { language, toggleLanguage } = useLanguage({
   titleRu: "Routecycle: маршруты без неприятных сюрпризов",
-  titleEn: "Routecycle: cycling routes without unpleasant surprises",
+  titleEn: "m_52d7e46ad8",
   descriptionRu:
     "Генерируйте gravel-маршруты в Routecycle и отправляйте треки в Garmin. Изучите демонстрацию покрытия, доступа и рисков.",
-  descriptionEn:
-    "Generate gravel routes in Routecycle and send tracks to Garmin. Explore the surface, access and risk demonstration.",
+  descriptionEn: "m_6a1d70f78d",
 });
 
 const route = computed(() => routes[routeKey.value]);
@@ -197,6 +196,7 @@ watch(
         <a href="#demo">{{ tr('m_38581d183b') }}</a>
         <a href="#method">{{ tr('m_9c870aa6e5') }}</a>
         <a href="#data">{{ tr('m_cec3a9b89b') }}</a>
+        <a :href="internalHref('routes/estonia/raanitsa-kambja/')">{{ tr('m_2c5b669bcd') }}</a>
         <a :href="internalHref('blog/')">{{ tr('m_8c6bc09953') }}</a>
         <a :href="internalHref('test-frontend/')">{{ tr('m_8a2cc0673b') }}</a>
       </nav>
@@ -499,6 +499,7 @@ watch(
         <span>{{ tr('m_c34ff1d892') }}</span>
       </p>
       <div data-vue-i18n>
+        <a class="footer-route-link" :href="internalHref('routes/estonia/raanitsa-kambja/')">{{ tr('m_2c5b669bcd') }} <span aria-hidden="true">→</span></a>
         <a class="footer-blog-link" :href="internalHref('blog/')">{{ tr('m_8c6bc09953') }} <span aria-hidden="true">→</span></a>
         <a
           class="footer-test-front-cta"

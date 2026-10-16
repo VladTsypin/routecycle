@@ -18,6 +18,10 @@ export default defineConfig({
           import.meta.dirname,
           "blog/why-a-line-is-not-a-route/index.html",
         ),
+        routeRaanitsaKambja: resolve(
+          import.meta.dirname,
+          "routes/estonia/raanitsa-kambja/index.html",
+        ),
         admin: resolve(import.meta.dirname, "admin/index.html"),
         testFrontend: resolve(import.meta.dirname, "test-frontend/index.html"),
         notFound: resolve(import.meta.dirname, "404.html"),

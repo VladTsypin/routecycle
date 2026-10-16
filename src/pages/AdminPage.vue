@@ -19,9 +19,9 @@ const github = {
 <template>
   <BlogShell
     title-ru="Админка Routecycle — управление контентом"
-    title-en="Routecycle Admin — content management"
+    title-en="m_c9806f92fb"
     description-ru="Управление контентом лендинга и блога Routecycle."
-    description-en="Manage Routecycle landing page and blog content."
+    description-en="m_31822dd0cb"
   >
 
 

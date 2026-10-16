@@ -11,9 +11,9 @@ const articleHref = computed(() => internalHref("blog/why-a-line-is-not-a-route/
 <template>
   <BlogShell
     title-ru="Блог Routecycle — маршруты и данные"
-    title-en="Routecycle Blog — routes and data"
+    title-en="m_73b2c44b48"
     description-ru="Практические материалы о качестве веломаршрутов, покрытии, доступе и данных OpenStreetMap."
-    description-en="Practical notes on cycling route quality, surfaces, access and OpenStreetMap data."
+    description-en="m_d08cc373ed"
   >
 
 
@@ -28,7 +28,7 @@ const articleHref = computed(() => internalHref("blog/why-a-line-is-not-a-route/
             <div class="blog-list-meta">
               <time datetime="2026-07-20">{{ formatDate('2026-07-20') }}</time>
               <span>{{ tr('m_b8a5508af9') }}</span>
-              <span>{{ tr('Read in English or Russian') }}</span>
+              <span>{{ tr('article_languages') }}</span>
             </div>
             <div>
               <p>{{ tr('m_35edc67a5d') }}</p>

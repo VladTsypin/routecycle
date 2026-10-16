@@ -10,6 +10,9 @@ const BlogPage = defineAsyncComponent(() => import("./pages/BlogPage.vue"));
 const NotFoundPage = defineAsyncComponent(
   () => import("./pages/NotFoundPage.vue"),
 );
+const RaanitsaKambjaRoutePage = defineAsyncComponent(
+  () => import("./pages/RaanitsaKambjaRoutePage.vue"),
+);
 const TestFrontendPage = defineAsyncComponent(
   () => import("./pages/TestFrontendPage.vue"),
 );
@@ -26,6 +29,9 @@ const page = computed(() => {
   if (normalized === "//" || normalized === "/") return LandingPage;
   if (normalized === "/blog/") return BlogPage;
   if (normalized === "/blog/why-a-line-is-not-a-route/") return ArticlePage;
+  if (normalized === "/routes/estonia/raanitsa-kambja/") {
+    return RaanitsaKambjaRoutePage;
+  }
   if (normalized === "/admin/") return AdminPage;
   if (normalized === "/test-frontend/") return TestFrontendPage;
   return NotFoundPage;

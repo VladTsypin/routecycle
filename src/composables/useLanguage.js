@@ -43,8 +43,13 @@ export function useTranslations() { return { language, tr, localeLoading, locale
 export function useLanguage(metadata = {}) {
   function syncDocument() {
     document.documentElement.lang = language.value;
-    if (metadata.titleEn) document.title = tr(metadata.titleEn);
-    const description = metadata.descriptionEn ? tr(metadata.descriptionEn) : '';
+    const title = language.value === 'ru' && metadata.titleRu
+      ? metadata.titleRu
+      : metadata.titleEn ? tr(metadata.titleEn) : '';
+    if (title) document.title = title;
+    const description = language.value === 'ru' && metadata.descriptionRu
+      ? metadata.descriptionRu
+      : metadata.descriptionEn ? tr(metadata.descriptionEn) : '';
     for (const selector of ['meta[name="description"]', 'meta[property="og:description"]']) {
       const element = document.querySelector(selector);
       if (element && description) element.content = description;
