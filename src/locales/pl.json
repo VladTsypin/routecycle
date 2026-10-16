@@ -350,5 +350,11 @@
   "route_cta_title": "Przejrzyj własną wersję w Routecycle.",
   "route_cta_text": "Zbuduj trasę i oddzielnie oceń powierzchnię, dostęp i odcinki, dla których nie ma wystarczających danych.",
   "route_cta_button": "Otwórz Routecycle →",
-  "not_found_meta_title": "Nie znaleziono strony — Routecycle"
+  "not_found_meta_title": "Nie znaleziono strony — Routecycle",
+  "promo_video_kicker": "WIDEO DEMO · 01:30",
+  "promo_video_title": "Od pomysłu do trasy, którą możesz przejrzeć.",
+  "promo_video_description": "Zobacz krótki proces planowania trasy: wybierz rodzaj przejazdu, porównaj opcje i sprawdź wynik na mapie.",
+  "promo_video_label": "Film demonstracyjny planowania trasy",
+  "promo_video_fallback": "Pobierz film demonstracyjny",
+  "promo_video_note": "Film nigdy nie uruchamia się automatycznie. Naciśnij przycisk odtwarzania, gdy będziesz gotowy."
 }

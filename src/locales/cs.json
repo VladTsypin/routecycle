@@ -350,5 +350,11 @@
   "route_cta_title": "Zkontrolujte svou vlastní verzi v Routecycle.",
   "route_cta_text": "Sestavte trasu a samostatně vyhodnoťte povrch, přístup a úseky s nedostatečnými daty.",
   "route_cta_button": "Otevřete Routecycle →",
-  "not_found_meta_title": "Stránka nenalezena — Routecycle"
+  "not_found_meta_title": "Stránka nenalezena — Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "Od nápadu k trase, kterou si můžete prohlédnout.",
+  "promo_video_description": "Podívejte se na krátký tok plánování trasy: vyberte typ jízdy, porovnejte možnosti a zkontrolujte výsledek na mapě.",
+  "promo_video_label": "Demo video plánování trasy",
+  "promo_video_fallback": "Stáhněte si ukázkové video",
+  "promo_video_note": "Video se nikdy nespustí automaticky. Až budete připraveni, stiskněte tlačítko přehrávání."
 }

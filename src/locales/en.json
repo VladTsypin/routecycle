@@ -350,5 +350,11 @@
   "route_cta_title": "Review your own version in Routecycle.",
   "route_cta_text": "Build a route and separately assess surface, access and sections with insufficient data.",
   "route_cta_button": "Open Routecycle →",
-  "not_found_meta_title": "Page not found — Routecycle"
+  "not_found_meta_title": "Page not found — Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "From an idea to a route you can review.",
+  "promo_video_description": "See a short route-planning flow: choose a ride type, compare options and inspect the result on the map.",
+  "promo_video_label": "Route planning demo video",
+  "promo_video_fallback": "Download the demo video",
+  "promo_video_note": "The video never starts automatically. Press play when you are ready."
 }

@@ -350,5 +350,11 @@
   "route_cta_title": "Tarkista oma versiosi Routecycleissa.",
   "route_cta_text": "Rakenna reitti ja arvioi erikseen pinta-ala, kulkutie ja osuudet puutteellisilla tiedoilla.",
   "route_cta_button": "Avaa Routecycle →",
-  "not_found_meta_title": "Sivua ei löydy – Routecycle"
+  "not_found_meta_title": "Sivua ei löydy – Routecycle",
+  "promo_video_kicker": "DEMOVIDEO · 01:30",
+  "promo_video_title": "Ideasta reittiin, jonka voit tarkastella.",
+  "promo_video_description": "Katso lyhyt reittisuunnittelun kulku: valitse ajotyyppi, vertaa vaihtoehtoja ja tarkasta tulos kartalta.",
+  "promo_video_label": "Reitin suunnittelun esittelyvideo",
+  "promo_video_fallback": "Lataa esittelyvideo",
+  "promo_video_note": "Video ei koskaan käynnisty automaattisesti. Paina play, kun olet valmis."
 }

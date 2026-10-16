@@ -350,5 +350,11 @@
   "route_cta_title": "Pregledajte vlastitu verziju u Routecycle.",
   "route_cta_text": "Izgradite rutu i zasebno procijenite površinu, pristup i dionice s nedovoljno podataka.",
   "route_cta_button": "Otvorite Routecycle →",
-  "not_found_meta_title": "Stranica nije pronađena — Routecycle"
+  "not_found_meta_title": "Stranica nije pronađena — Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "Od ideje do rute koju možete pregledati.",
+  "promo_video_description": "Pogledajte kratki tijek planiranja rute: odaberite vrstu vožnje, usporedite opcije i provjerite rezultat na karti.",
+  "promo_video_label": "Demo video za planiranje rute",
+  "promo_video_fallback": "Preuzmite demo video",
+  "promo_video_note": "Video nikada ne počinje automatski. Pritisnite play kada budete spremni."
 }

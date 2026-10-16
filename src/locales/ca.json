@@ -350,5 +350,11 @@
   "route_cta_title": "Revisa la teva pròpia versió a Routecycle.",
   "route_cta_text": "Construeix una ruta i avalua per separat la superfície, l'accés i els trams amb dades insuficients.",
   "route_cta_button": "Obre Routecycle →",
-  "not_found_meta_title": "No s'ha trobat la pàgina — Routecycle"
+  "not_found_meta_title": "No s'ha trobat la pàgina — Routecycle",
+  "promo_video_kicker": "VÍDEO DEMO · 01:30",
+  "promo_video_title": "Des d'una idea fins a una ruta que pots revisar.",
+  "promo_video_description": "Vegeu un flux curt de planificació de rutes: trieu un tipus de viatge, compareu opcions i inspeccioneu el resultat al mapa.",
+  "promo_video_label": "Vídeo de demostració de planificació de rutes",
+  "promo_video_fallback": "Baixeu el vídeo de demostració",
+  "promo_video_note": "El vídeo no s'inicia mai automàticament. Premeu Reproduir quan estigueu preparat."
 }

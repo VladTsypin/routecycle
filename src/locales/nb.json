@@ -350,5 +350,11 @@
   "route_cta_title": "Se gjennom din egen versjon i Routecycle.",
   "route_cta_text": "Bygg en rute og separat vurdere overflate, adkomst og seksjoner med utilstrekkelige data.",
   "route_cta_button": "Åpne Routecycle →",
-  "not_found_meta_title": "Siden ikke funnet — Routecycle"
+  "not_found_meta_title": "Siden ikke funnet — Routecycle",
+  "promo_video_kicker": "DEMOVIDEO · 01:30",
+  "promo_video_title": "Fra en idé til en rute du kan se gjennom.",
+  "promo_video_description": "Se en kort ruteplanleggingsflyt: velg en turtype, sammenlign alternativer og inspiser resultatet på kartet.",
+  "promo_video_label": "Demovideo for ruteplanlegging",
+  "promo_video_fallback": "Last ned demovideoen",
+  "promo_video_note": "Videoen starter aldri automatisk. Trykk på play når du er klar."
 }

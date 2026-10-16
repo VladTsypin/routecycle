@@ -350,5 +350,11 @@
   "route_cta_title": "Überprüfen Sie Ihre eigene Version in Routecycle.",
   "route_cta_text": "Erstellen Sie eine Route und bewerten Sie separat die Oberfläche, den Zugang und die Abschnitte mit unzureichenden Daten.",
   "route_cta_button": "Öffnen Sie Routecycle →",
-  "not_found_meta_title": "Seite nicht gefunden – Routecycle"
+  "not_found_meta_title": "Seite nicht gefunden – Routecycle",
+  "promo_video_kicker": "DEMO-VIDEO · 01:30",
+  "promo_video_title": "Von einer Idee zu einer Route, die Sie überprüfen können.",
+  "promo_video_description": "Sehen Sie sich einen kurzen Routenplanungsablauf an: Wählen Sie einen Fahrtyp, vergleichen Sie Optionen und überprüfen Sie das Ergebnis auf der Karte.",
+  "promo_video_label": "Demovideo zur Routenplanung",
+  "promo_video_fallback": "Laden Sie das Demovideo herunter",
+  "promo_video_note": "Das Video startet nie automatisch. Drücken Sie Play, wenn Sie bereit sind."
 }

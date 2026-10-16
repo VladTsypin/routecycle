@@ -350,5 +350,11 @@
   "route_cta_title": "Vérifiez votre propre version dans Routecycle.",
   "route_cta_text": "Construire un itinéraire et évaluer séparément la surface, l'accès et les sections avec des données insuffisantes.",
   "route_cta_button": "Ouvrir Routecycle →",
-  "not_found_meta_title": "Page introuvable — Routecycle"
+  "not_found_meta_title": "Page introuvable — Routecycle",
+  "promo_video_kicker": "VIDÉO DE DÉMO · 01:30",
+  "promo_video_title": "D'une idée à un itinéraire révisable.",
+  "promo_video_description": "Visualisez un court flux de planification d'itinéraire : choisissez un type de trajet, comparez les options et inspectez le résultat sur la carte.",
+  "promo_video_label": "Vidéo de démonstration de planification d'itinéraire",
+  "promo_video_fallback": "Téléchargez la vidéo de démonstration",
+  "promo_video_note": "La vidéo ne démarre jamais automatiquement. Appuyez sur play lorsque vous êtes prêt."
 }

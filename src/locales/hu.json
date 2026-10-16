@@ -350,5 +350,11 @@
   "route_cta_title": "Tekintse át saját verzióját az Routecycle-ben.",
   "route_cta_text": "Útvonal kiépítése, és külön-külön értékelje a felszínt, a hozzáférést és a szakaszokat nem elegendő adattal.",
   "route_cta_button": "Nyissa meg az Routecycle → lehetőséget",
-  "not_found_meta_title": "Az oldal nem található – Routecycle"
+  "not_found_meta_title": "Az oldal nem található – Routecycle",
+  "promo_video_kicker": "DEMO VIDEÓ · 01:30",
+  "promo_video_title": "Egy ötlettől az áttekinthető útvonalig.",
+  "promo_video_description": "Tekintse meg a rövid útvonaltervezési folyamatot: válasszon egy utazási típust, hasonlítsa össze a lehetőségeket, és ellenőrizze az eredményt a térképen.",
+  "promo_video_label": "Útvonaltervezés bemutató videó",
+  "promo_video_fallback": "Töltse le a bemutató videót",
+  "promo_video_note": "A videó soha nem indul el automatikusan. Nyomja meg a lejátszást, ha készen áll."
 }

@@ -350,5 +350,11 @@
   "route_cta_title": "Examinați propria versiune în Routecycle.",
   "route_cta_text": "Construiți un traseu și evaluați separat suprafața, accesul și secțiunile cu date insuficiente.",
   "route_cta_button": "Deschideți Routecycle →",
-  "not_found_meta_title": "Pagina nu a fost găsită — Routecycle"
+  "not_found_meta_title": "Pagina nu a fost găsită — Routecycle",
+  "promo_video_kicker": "VIDEO DEMO · 01:30",
+  "promo_video_title": "De la o idee la un traseu pe care îl puteți revizui.",
+  "promo_video_description": "Vedeți un scurt flux de planificare a rutei: alegeți un tip de călătorie, comparați opțiunile și inspectați rezultatul pe hartă.",
+  "promo_video_label": "Video demonstrativ de planificare a rutei",
+  "promo_video_fallback": "Descărcați videoclipul demonstrativ",
+  "promo_video_note": "Videoclipul nu începe niciodată automat. Apăsați pe play când sunteți gata."
 }

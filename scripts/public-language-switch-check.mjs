@@ -6,13 +6,19 @@ import path from "node:path";
 import { languages } from "../src/locales/languages.js";
 
 const outputRoot = path.resolve("out");
+const remoteBaseUrl = process.env.ROUTECYCLE_QA_BASE_URL?.trim();
+const baseUrl = remoteBaseUrl
+  ? `${remoteBaseUrl.replace(/\/+$/, "")}/`
+  : "http://127.0.0.1:4179/routecycle/";
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".mp4": "video/mp4",
   ".txt": "text/plain; charset=utf-8",
+  ".webp": "image/webp",
   ".woff2": "font/woff2",
 };
 
@@ -23,7 +29,7 @@ const catalogs = Object.fromEntries(
   ]),
 );
 
-const server = createServer(async (request, response) => {
+const server = remoteBaseUrl ? null : createServer(async (request, response) => {
   const pathname = new URL(request.url, "http://127.0.0.1").pathname;
   const relative = decodeURIComponent(pathname)
     .replace(/^\/routecycle\/?/, "")
@@ -42,7 +48,7 @@ const server = createServer(async (request, response) => {
   }
 });
 
-await new Promise((resolve) => server.listen(4179, "127.0.0.1", resolve));
+if (server) await new Promise((resolve) => server.listen(4179, "127.0.0.1", resolve));
 
 const pages = [
   { path: "", selector: ".hero h1", textKey: "m_f1fbc25993", titleKey: "m_52d7e46ad8" },
@@ -81,6 +87,25 @@ async function verify(page, pageConfig, code) {
   if (selected !== code || state.lang !== code) failures.push("language-state-not-updated");
   if (state.overflow) failures.push("horizontal-overflow");
   if (state.leakedKey) failures.push("translation-key-visible");
+  if (pageConfig.path === "") {
+    const videoTitle = (await page.locator(".promo-video-heading h2").innerText()).trim();
+    const videoState = await page.locator(".promo-video-frame video").evaluate((video) => ({
+      autoplay: video.autoplay,
+      controls: video.controls,
+      currentTime: video.currentTime,
+      paused: video.paused,
+      poster: video.poster,
+      preload: video.preload,
+      source: video.querySelector("source")?.src ?? "",
+    }));
+    if (videoTitle !== catalogs[code].promo_video_title) failures.push("video-copy-not-translated");
+    if (videoState.autoplay || !videoState.paused || videoState.currentTime > 0.01) {
+      failures.push("video-autoplayed");
+    }
+    if (!videoState.controls || videoState.preload !== "metadata") failures.push("video-controls-misconfigured");
+    if (!videoState.poster.endsWith("/routecycle/media/promo-roads-poster.webp")) failures.push("video-poster-missing");
+    if (!videoState.source.endsWith("/routecycle/media/promo-roads.mp4")) failures.push("video-source-missing");
+  }
   return { code, actualText, title, ...state, failures };
 }
 
@@ -94,7 +119,7 @@ try {
       const page = await context.newPage();
       const errors = [];
       page.on("pageerror", (error) => errors.push(error.message));
-      await page.goto(`http://127.0.0.1:4179/routecycle/${pageConfig.path}?lang=en`, {
+      await page.goto(`${baseUrl}${pageConfig.path}?lang=en`, {
         waitUntil: "networkidle",
       });
       const checks = [];
@@ -106,12 +131,10 @@ try {
     }
   }
 
-  for (const pageConfig of pages.filter(({ path }) =>
-    path.startsWith("blog/why-") || path.startsWith("routes/"),
-  )) {
+  for (const pageConfig of pages) {
     const context = await browser.newContext({ viewport: { width: 390, height: 900 } });
     const page = await context.newPage();
-    await page.goto(`http://127.0.0.1:4179/routecycle/${pageConfig.path}?lang=en`, {
+    await page.goto(`${baseUrl}${pageConfig.path}?lang=en`, {
       waitUntil: "networkidle",
     });
     const checks = [];
@@ -122,7 +145,7 @@ try {
 
   const context = await browser.newContext({ viewport: { width: 390, height: 900 } });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:4179/routecycle/?lang=et", { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}?lang=et`, { waitUntil: "networkidle" });
   await page.locator('.footer-route-link').click();
   await page.waitForURL(/routes\/estonia\/raanitsa-kambja/);
   const carriedLanguage = new URL(page.url()).searchParams.get("lang");
@@ -140,7 +163,7 @@ try {
   await context.close();
 } finally {
   await browser.close();
-  await new Promise((resolve) => server.close(resolve));
+  if (server) await new Promise((resolve) => server.close(resolve));
 }
 
 const failures = results.flatMap((result) => [
@@ -149,5 +172,5 @@ const failures = results.flatMap((result) => [
   ...(result.checks ?? []).flatMap((check) => check.failures),
 ]);
 
-console.log(JSON.stringify({ checked: results.length, failed: failures.length, failures }, null, 2));
+console.log(JSON.stringify({ baseUrl, checked: results.length, failed: failures.length, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

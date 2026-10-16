@@ -350,5 +350,11 @@
   "route_cta_title": "Routecycle'de kendi sürümünüzü inceleyin.",
   "route_cta_text": "Bir rota oluşturun ve yetersiz veri içeren yüzey, erişim ve bölümleri ayrı ayrı değerlendirin.",
   "route_cta_button": "Routecycle'i açın →",
-  "not_found_meta_title": "Sayfa bulunamadı — Routecycle"
+  "not_found_meta_title": "Sayfa bulunamadı — Routecycle",
+  "promo_video_kicker": "DEMO VİDEOSU · 01:30",
+  "promo_video_title": "Bir fikirden bir rotaya kadar inceleyebilirsiniz.",
+  "promo_video_description": "Kısa bir rota planlama akışına bakın: bir yolculuk türü seçin, seçenekleri karşılaştırın ve sonucu haritada inceleyin.",
+  "promo_video_label": "Rota planlama demo videosu",
+  "promo_video_fallback": "Demo videosunu indirin",
+  "promo_video_note": "Video hiçbir zaman otomatik olarak başlamaz. Hazır olduğunuzda oynat tuşuna basın."
 }

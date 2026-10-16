@@ -38,6 +38,8 @@ const routecycleLinks = {
   footerLink:
     "https://routecycle.com/?utm_source=github_pages&utm_medium=referral&utm_campaign=routecycle_landing&utm_content=footer_link",
 };
+const promoVideoUrl = `${import.meta.env.BASE_URL}media/promo-roads.mp4`;
+const promoVideoPosterUrl = `${import.meta.env.BASE_URL}media/promo-roads-poster.webp`;
 
 const routeKey = ref("balanced");
 const settingsOpen = ref(false);
@@ -268,6 +270,30 @@ watch(
           <p>{{ tr(note) }}</p>
         </article>
       </div>
+    </section>
+
+    <section class="promo-video-section" aria-labelledby="promo-video-title">
+      <div class="promo-video-heading">
+        <div>
+          <p class="eyebrow">{{ tr('promo_video_kicker') }}</p>
+          <h2 id="promo-video-title">{{ tr('promo_video_title') }}</h2>
+        </div>
+        <p>{{ tr('promo_video_description') }}</p>
+      </div>
+
+      <figure class="promo-video-frame">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          :poster="promoVideoPosterUrl"
+          :aria-label="tr('promo_video_label')"
+        >
+          <source :src="promoVideoUrl" type="video/mp4" />
+          <a :href="promoVideoUrl">{{ tr('promo_video_fallback') }}</a>
+        </video>
+        <figcaption>{{ tr('promo_video_note') }}</figcaption>
+      </figure>
     </section>
 
     <section id="demo" class="planner-section">

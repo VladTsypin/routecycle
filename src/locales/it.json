@@ -350,5 +350,11 @@
   "route_cta_title": "Rivedi la tua versione in Routecycle.",
   "route_cta_text": "Costruire un percorso e valutare separatamente superficie, accesso e tratti con dati insufficienti.",
   "route_cta_button": "Apri Routecycle →",
-  "not_found_meta_title": "Pagina non trovata: Routecycle"
+  "not_found_meta_title": "Pagina non trovata: Routecycle",
+  "promo_video_kicker": "VIDEO DIMOSTRATIVO · 01:30",
+  "promo_video_title": "Da un'idea ad un percorso da rivedere.",
+  "promo_video_description": "Visualizza un breve flusso di pianificazione del percorso: scegli un tipo di corsa, confronta le opzioni e controlla il risultato sulla mappa.",
+  "promo_video_label": "Video dimostrativo sulla pianificazione del percorso",
+  "promo_video_fallback": "Scarica il video dimostrativo",
+  "promo_video_note": "Il video non si avvia mai automaticamente. Premi Riproduci quando sei pronto."
 }

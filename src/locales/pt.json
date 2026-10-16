@@ -350,5 +350,11 @@
   "route_cta_title": "Revise sua própria versão em Routecycle.",
   "route_cta_text": "Construir uma rota e avaliar separadamente superfície, acessos e trechos com dados insuficientes.",
   "route_cta_button": "Abra Routecycle →",
-  "not_found_meta_title": "Página não encontrada — Routecycle"
+  "not_found_meta_title": "Página não encontrada — Routecycle",
+  "promo_video_kicker": "VÍDEO DE DEMONSTRAÇÃO · 01:30",
+  "promo_video_title": "De uma ideia a um roteiro que você pode revisar.",
+  "promo_video_description": "Veja um breve fluxo de planejamento de rotas: escolha um tipo de passeio, compare as opções e inspecione o resultado no mapa.",
+  "promo_video_label": "Vídeo de demonstração de planejamento de rota",
+  "promo_video_fallback": "Baixe o vídeo de demonstração",
+  "promo_video_note": "O vídeo nunca inicia automaticamente. Pressione play quando estiver pronto."
 }

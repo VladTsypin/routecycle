@@ -350,5 +350,11 @@
   "route_cta_title": "Preglejte svojo različico v Routecycle.",
   "route_cta_text": "Zgradite pot in ločeno ocenite površino, dostop in odseke z nezadostnimi podatki.",
   "route_cta_button": "Odprite Routecycle →",
-  "not_found_meta_title": "Stran ni najdena — Routecycle"
+  "not_found_meta_title": "Stran ni najdena — Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "Od ideje do poti, ki jo lahko pregledate.",
+  "promo_video_description": "Oglejte si kratek potek načrtovanja poti: izberite vrsto vožnje, primerjajte možnosti in preglejte rezultat na zemljevidu.",
+  "promo_video_label": "Demo video za načrtovanje poti",
+  "promo_video_fallback": "Prenesite predstavitveni video",
+  "promo_video_note": "Video se nikoli ne zažene samodejno. Pritisnite predvajaj, ko ste pripravljeni."
 }

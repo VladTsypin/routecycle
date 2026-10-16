@@ -350,5 +350,11 @@
   "route_cta_title": "Pārskatiet savu versiju Routecycle.",
   "route_cta_text": "Izveidojiet maršrutu un atsevišķi novērtējiet virsmu, piekļuvi un posmus ar nepietiekamiem datiem.",
   "route_cta_button": "Atvērt Routecycle →",
-  "not_found_meta_title": "Lapa nav atrasta — Routecycle"
+  "not_found_meta_title": "Lapa nav atrasta — Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "No idejas līdz maršrutam, kuru varat pārskatīt.",
+  "promo_video_description": "Skatiet īsu maršruta plānošanas plūsmu: izvēlieties brauciena veidu, salīdziniet iespējas un pārbaudiet rezultātu kartē.",
+  "promo_video_label": "Maršruta plānošanas demonstrācijas video",
+  "promo_video_fallback": "Lejupielādējiet demonstrācijas video",
+  "promo_video_note": "Video nekad nesākas automātiski. Nospiediet atskaņot, kad esat gatavs."
 }

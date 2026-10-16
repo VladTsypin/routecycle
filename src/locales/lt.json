@@ -350,5 +350,11 @@
   "route_cta_title": "Peržiūrėkite savo versiją Routecycle.",
   "route_cta_text": "Nustatyti maršrutą ir atskirai įvertinti paviršių, privažiavimą ir atkarpas, kurių duomenų nepakanka.",
   "route_cta_button": "Atidaryti Routecycle →",
-  "not_found_meta_title": "Puslapis nerastas – Routecycle"
+  "not_found_meta_title": "Puslapis nerastas – Routecycle",
+  "promo_video_kicker": "DEMO VIDEO · 01:30",
+  "promo_video_title": "Nuo idėjos iki maršruto, kurį galite peržiūrėti.",
+  "promo_video_description": "Pamatykite trumpą maršruto planavimo eigą: pasirinkite važiavimo tipą, palyginkite parinktis ir patikrinkite rezultatą žemėlapyje.",
+  "promo_video_label": "Maršruto planavimo demonstracinis vaizdo įrašas",
+  "promo_video_fallback": "Atsisiųskite demonstracinį vaizdo įrašą",
+  "promo_video_note": "Vaizdo įrašas niekada neprasideda automatiškai. Paspauskite žaisti, kai būsite pasiruošę."
 }
